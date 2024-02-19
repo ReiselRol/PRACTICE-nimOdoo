@@ -1,0 +1,22 @@
+.nav-container {
+    width: 100vw;
+    height: 9vh;
+    font-size: 2.2vmax;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-weight: 1000;
+    background: linear-gradient(90deg,#00b3ff, #0077ff);
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+}
+.nav-distributionTable {
+    width: 100vw;
+}
+.nav-distributionTableTr {
+    width: 100vw;
+}
+.nav-tdLogo {
+    width: 8vw;
+}
