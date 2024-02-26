@@ -1,1 +1,1 @@
-export const HAMBURGER_LOGO_URL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Hamburger_icon_white.svg/32px-Hamburger_icon_white.svg.png'
+export const HAMBURGER_LOGO_URL = "/assets/imgs/burgercho.png"

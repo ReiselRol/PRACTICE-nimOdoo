@@ -19,4 +19,15 @@
 }
 .nav-tdLogo {
     width: 8vw;
+    padding-left: 2.5%;
+}
+.nav-Hamburger {
+    width: 5%;
+    vertical-align: center;
+    text-align: center;
+    padding: 0%;
+}
+.nav-Hamburger-img {
+    width: 60%;
+    height: 60%;
 }
