@@ -58,6 +58,21 @@ const resolvers = {
             const newSalesProposal = new salesProposalModel(args);
             return newSalesProposal.save();
         },
+        deleteUser: async (parent, { userID }) => {
+            return userModel.findById(userID).then(user => user.deleteOne());
+        },
+        deleteClient: async (parent, { clientID }) => {
+            return clientModel.findById(clientID).then(client => client.deleteOne());
+        },
+        deleteEnterprise: async (parent, { enterpriseID }) => {
+            return enterpriseModel.findById(enterpriseID).then(enterprise => enterprise.deleteOne());
+        },
+        deleteProduct: async (parent, { productID }) => {
+            return productModel.findById(productID).then(product => product.deleteOne());
+        },
+        deleteSalesProposal: async (parent, { salesProposalID }) => {
+            return salesProposalModel.findById(salesProposalID).then(salesProposal => salesProposal.deleteOne());
+        },
     },
 };
 

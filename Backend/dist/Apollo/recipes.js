@@ -1,5 +1,7 @@
+import mongoose from 'mongoose';
 import { model, Schema } from 'mongoose';
 const userSchema = new Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     name: String,
     surname: String,
     email: String,

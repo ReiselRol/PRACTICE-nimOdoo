@@ -1,0 +1,14 @@
+.SpaceForForms {
+    position: fixed;
+    width: 60vw;
+    height: 75vh;
+    top: 12.5vh;
+    left: 20vw;
+    z-index: 2;
+    border-radius: 1vmax;
+    padding: 1vmax;
+    background: radial-gradient(#ffffff, #e7e7e7)
+}
+.nimodooCenter{
+    margin-left: 40%;
+}

@@ -91,6 +91,12 @@ const typeDefs = ` #graphql
             clientID: String!
             state: Int
         ): SalesProposal
+
+        deleteUser(userID: ID!): User
+        deleteClient(clientID: ID!): Client
+        deleteEnterprise(enterpriseID: ID!): Enterprise
+        deleteProduct(productID: ID!): Product
+        deleteSalesProposal(salesProposalID: ID!): SalesProposal
     }
 `
 export default typeDefs
