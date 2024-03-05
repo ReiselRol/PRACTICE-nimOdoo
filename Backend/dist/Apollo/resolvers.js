@@ -38,23 +38,43 @@ const resolvers = {
     Mutation: {
         addUser: async (parent, args) => {
             const newUser = new userModel(args);
-            return newUser.save();
+            const savedUser = await newUser.save();
+            // Asignar el ID del usuario al campo ID
+            savedUser.ID = savedUser._id.toString();
+            await userModel.findByIdAndUpdate(savedUser._id, { ID: savedUser._id }, { new: true });
+            return savedUser;
         },
         addClient: async (parent, args) => {
             const newClient = new clientModel(args);
-            return newClient.save();
+            const savedClient = await newClient.save();
+            // Asignar el ID del cliente al campo ID
+            savedClient.ID = savedClient._id.toString();
+            await clientModel.findByIdAndUpdate(savedClient._id, { ID: savedClient._id }, { new: true });
+            return savedClient;
         },
         addEnterprise: async (parent, args) => {
             const newEnterprise = new enterpriseModel(args);
-            return newEnterprise.save();
+            const savedEnterprise = await newEnterprise.save();
+            // Asignar el ID de la empresa al campo ID
+            savedEnterprise.ID = savedEnterprise._id.toString();
+            await enterpriseModel.findByIdAndUpdate(savedEnterprise._id, { ID: savedEnterprise._id }, { new: true });
+            return savedEnterprise;
         },
         addProduct: async (parent, args) => {
             const newProduct = new productModel(args);
-            return newProduct.save();
+            const savedProduct = await newProduct.save();
+            // Asignar el ID del producto al campo ID
+            savedProduct.ID = savedProduct._id.toString();
+            await productModel.findByIdAndUpdate(savedProduct._id, { ID: savedProduct._id }, { new: true });
+            return savedProduct;
         },
         addSalesProposal: async (parent, args) => {
             const newSalesProposal = new salesProposalModel(args);
-            return newSalesProposal.save();
+            const savedSalesProposal = await newSalesProposal.save();
+            // Asignar el ID de la propuesta de venta al campo ID
+            savedSalesProposal.ID = savedSalesProposal._id.toString();
+            await salesProposalModel.findByIdAndUpdate(savedSalesProposal._id, { ID: savedSalesProposal._id }, { new: true });
+            return savedSalesProposal;
         },
         deleteUser: async (parent, { userID }) => {
             return userModel.findById(userID).then(user => user.deleteOne());

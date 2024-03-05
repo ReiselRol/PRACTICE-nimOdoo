@@ -1,6 +1,7 @@
 import {model, Schema} from 'mongoose'
 
 const userSchema = new Schema({
+    ID : String,
     name: String,
     surname: String,
     email: String,
@@ -9,6 +10,7 @@ const userSchema = new Schema({
 })
 
 const clientSchema = new Schema({
+    ID : String,
     name: String,
     surname: String,
     email: String,
@@ -17,11 +19,13 @@ const clientSchema = new Schema({
 })
 
 const enterpriseSchema = new Schema({
+    ID : String,
     name: String,
     phone: String,
 })
 
 const productSchema = new Schema({
+    ID : String,
     enterpriseFromID: String, // La ID de la empresa de la que proviene
     name: String,
     description: String,
@@ -29,6 +33,7 @@ const productSchema = new Schema({
 })
 
 const salesProposalSchema = new Schema({
+    ID : String,
     proposerID : String, // Client ID del que vende 
     clientID : String, // Client ID del que compra
     creationDate : String,

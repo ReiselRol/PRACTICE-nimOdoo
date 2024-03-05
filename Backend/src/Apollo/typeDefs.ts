@@ -1,5 +1,6 @@
 const typeDefs = ` #graphql
     type User {
+        ID: String!
         name: String!
         surname: String
         email: String!
@@ -8,6 +9,7 @@ const typeDefs = ` #graphql
     }
 
     type Client {
+        ID: String!
         name: String!
         surname: String
         email: String!
@@ -16,11 +18,13 @@ const typeDefs = ` #graphql
     }
 
     type Enterprise {
+        ID: String!
         name: String!
         phone: String!
     }
 
     type Product {
+        ID: String!
         name: String!
         description: String
         enterpriseFromID: String
@@ -28,6 +32,7 @@ const typeDefs = ` #graphql
     }
 
     type SalesProposal {
+        ID: String!
         proposerID: String!
         clientID: String!
         creationDate: String!

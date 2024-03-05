@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
 import { model, Schema } from 'mongoose';
 const userSchema = new Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+    ID: String,
     name: String,
     surname: String,
     email: String,
@@ -9,6 +8,7 @@ const userSchema = new Schema({
     admin: Boolean // Añadir modulos y editar info
 });
 const clientSchema = new Schema({
+    ID: String,
     name: String,
     surname: String,
     email: String,
@@ -16,16 +16,19 @@ const clientSchema = new Schema({
     enterpriseID: Number // ID Empresa si es de una y si no -1
 });
 const enterpriseSchema = new Schema({
+    ID: String,
     name: String,
     phone: String,
 });
 const productSchema = new Schema({
+    ID: String,
     enterpriseFromID: String, // La ID de la empresa de la que proviene
     name: String,
     description: String,
     enterpriseToID: String, // La ID de la empresa de la cual se le vende
 });
 const salesProposalSchema = new Schema({
+    ID: String,
     proposerID: String, // Client ID del que vende 
     clientID: String, // Client ID del que compra
     creationDate: String,
