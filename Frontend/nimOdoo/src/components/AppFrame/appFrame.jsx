@@ -1,15 +1,17 @@
-import { useState } from "react"
 import { Navbar } from "./Navbar/navbar"
 import { DinamicLateralBar } from "./DinamicLateralBar/dinamicLateralBar"
+import { useSelector } from 'react-redux'
 import './appFrame.css'
 
 export function AppFrame({children}) {
-    const [isHamburgerOpened, setIsHamburgerOpened] = useState(false)
+    
+    const isLateralBarOpened = useSelector((state) => state.AppGlobals.UI.isOpened)
+    const infoStyle = (isLateralBarOpened) ? "app-container app-darkerBg" : "app-container app-unDarkedBg"
     return (
         <>
-            <Navbar SetIsHamburgerOpened={setIsHamburgerOpened} IsHamburgerOpened={isHamburgerOpened}/>
-            <DinamicLateralBar isVisible={isHamburgerOpened}/>
-            <div className={(isHamburgerOpened) ? "app-container app-darkerBg" : "app-container app-unDarkedBg"}>{children}</div>
+            <Navbar/>
+            <DinamicLateralBar/>
+            <div className={infoStyle}>{children}</div>
         </>
     )
 }

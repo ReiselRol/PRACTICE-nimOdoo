@@ -44,6 +44,8 @@ const typeDefs = ` #graphql
         getUsers: [User!]!
         
         getUserByID(userID: ID!): User
+
+        getUserByEmail(userEmail: String): User
     
         getClients: [Client!]!
     
@@ -65,7 +67,7 @@ const typeDefs = ` #graphql
     type Mutation {
         addUser(    
             name: String!
-            surname: String
+            surname: String!
             email: String!
             password: String!
             admin: Boolean!

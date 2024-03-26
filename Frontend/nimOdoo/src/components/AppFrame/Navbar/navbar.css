@@ -1,28 +1,29 @@
 .nav-container {
     width: 100vw;
-    height: 9vh;
+    height: 10vh;
     font-size: 2.2vmax;
     position: fixed;
     top: 0;
     left: 0;
-    font-weight: 1000;
+    font-weight: 500;
     background: linear-gradient(90deg,#00b3ff, #0077ff);
-    margin: 0;
-    padding: 0;
-    z-index: 1000;
+    z-index: 2000;
 }
 .nav-distributionTable {
     width: 100vw;
+    height: 10vh;
 }
 .nav-distributionTableTr {
     width: 100vw;
+    height: 100%;
+    vertical-align: middle;
 }
 .nav-tdLogo {
     width: 8vw;
     padding-left: 2.5%;
 }
 .nav-Hamburger {
-    width: 5%;
+    width: 5vw;
     vertical-align: center;
     text-align: center;
     padding: 0%;
@@ -30,4 +31,10 @@
 .nav-Hamburger-img {
     width: 60%;
     height: 60%;
+}
+.nav-tdTitleName {
+    width: 90vw;
+    padding-left: 3vw;
+    color: white;
+
 }

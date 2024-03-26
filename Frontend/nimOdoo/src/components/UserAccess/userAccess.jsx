@@ -14,7 +14,9 @@ export function UserAccess ({setIsLogged, setUser}) {
     )
     return(
         <FormContainer>
-            <RegisterForm setIsOnLogin={setIsOnLogin}/>
+            <RegisterForm setIsOnLogin={setIsOnLogin}
+                          setIsLogged={setIsLogged}
+                          setUser={setUser}/> 
         </FormContainer>
     )
 }

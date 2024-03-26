@@ -3,16 +3,24 @@ import { AppFrame } from "./components/AppFrame/appFrame"
 import { NotFoundPage } from "./components/NotFoundPage/notFoundPage"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { UserAccess } from "./components/UserAccess/userAccess"
-import { useQuery } from "@apollo/client";
-import { getAllUsers } from "./apollo/apolloQueries"
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { setIsLoged, setUser } from "./redux/Slices/AppSlice"
+
 
 export function App () {
 
-    const {loading, error, data} = useQuery(getAllUsers)
-    if (loading == false) console.log(data)
+    const isLogged = useSelector((state) => state.AppGlobals.UI.isLogged)
+    const user = useSelector((state) => state.AppGlobals.User)
+    const dispatch = useDispatch()
 
-    const [isLogged, setIsLogged] = useState(false)
-    const [user, setUser] = useState({})
+    useEffect(() => {
+        const userJSON = localStorage.getItem('user');
+        if (userJSON != null) {
+            dispatch(setIsLoged(true))
+            dispatch(setUser(userJSON))
+        }
+    }, [])
 
     const ROUTER = createBrowserRouter([
         {
@@ -22,7 +30,7 @@ export function App () {
         },
     ])
 
-    if (isLogged == false) return (<UserAccess setIsLogged={setIsLogged} setUser={setUser}/>)
+    if (isLogged == false) return (<UserAccess/>)
     return (
         <AppFrame>
             <RouterProvider router={ROUTER}>

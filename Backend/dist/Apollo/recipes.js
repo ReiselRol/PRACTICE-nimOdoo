@@ -3,7 +3,12 @@ const userSchema = new Schema({
     ID: String,
     name: String,
     surname: String,
-    email: String,
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        index: true
+    },
     password: String,
     admin: Boolean // Añadir modulos y editar info
 });

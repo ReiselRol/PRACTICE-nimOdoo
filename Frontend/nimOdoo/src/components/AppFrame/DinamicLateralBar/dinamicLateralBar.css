@@ -1,18 +1,18 @@
 .dlb-container {
     position: fixed;
-    top: 9vh;
+    top: 10vh;
+    left: 0vw;
     height: 91vh;
-    width: 19vw;
     margin: 0;
     padding: 0;
     z-index: 1002;
     background: linear-gradient(180deg, #00b3ff, #0077ff);
     filter: brightness(0.7);
-    transition: left 0.5s ease-in-out;
+    transition: width 0.5s ease-in-out;
 }
 .dlb-containerUnactived {
-    left: -12vw;
+    width: 7vw;
 }
 .dlb-containerActived {
-    left: 0vw;
+    width: 19vw;
 }

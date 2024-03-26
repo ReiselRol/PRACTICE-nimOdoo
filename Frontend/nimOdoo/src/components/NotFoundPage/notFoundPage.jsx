@@ -1,3 +1,9 @@
+import { FormContainer } from "../UserAccess/FormContainer/formContainer"
+
 export function NotFoundPage ({}) {
-    return <div>Error 404 Not found</div>
+    return (
+        <FormContainer>
+            Error 404 not Found
+        </FormContainer>
+    )
 }

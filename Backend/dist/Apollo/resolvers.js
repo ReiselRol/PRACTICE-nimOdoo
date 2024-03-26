@@ -10,6 +10,9 @@ const resolvers = {
         getUserByID: async (parent, { userID }) => {
             return userModel.findById(userID);
         },
+        getUserByEmail: async (parent, { userEmail }) => {
+            return userModel.findOne({ email: userEmail });
+        },
         getClients: async () => {
             return clientModel.find();
         },
