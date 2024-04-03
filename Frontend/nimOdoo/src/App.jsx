@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { AppFrame } from "./components/AppFrame/appFrame"
 import { NotFoundPage } from "./components/NotFoundPage/notFoundPage"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
@@ -11,7 +10,6 @@ import { setIsLoged, setUser } from "./redux/Slices/AppSlice"
 export function App () {
 
     const isLogged = useSelector((state) => state.AppGlobals.UI.isLogged)
-    const user = useSelector((state) => state.AppGlobals.User)
     const dispatch = useDispatch()
 
     useEffect(() => {

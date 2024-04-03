@@ -1,0 +1,30 @@
+.user-info-encapsuler {
+    position: fixed;
+    z-index: 1999;
+    left: 80vw;
+    width: 20vw;
+    height: 15vh;
+    background: radial-gradient(#e6eaff, rgb(203, 227, 255));
+    border: #0077ff solid 4px;
+    border-end-end-radius: 20px;
+    border-end-start-radius: 20px;
+    transition: top 0.3s ease-in-out;
+}
+.user-info-encapsuler-actived {
+    top: 10vh;
+}
+.user-info-encapsuler-unctived {
+    top: -10vh;
+}
+.user-info-table {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.348);
+    margin-bottom: 5%;
+    font-weight: 600;
+    padding: 0;
+}
+.user-info-td-close {
+    background: radial-gradient(#ff9999, rgb(255, 50, 50));
+    text-align: center;
+}

@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react"
 import { useQuery } from "@apollo/client";
 import * as Queries from "../../../apollo/apolloQueries";
+import { useDispatch } from "react-redux"
+import { setIsLoged, handleLogin } from "../../../redux/Slices/AppSlice";
 import '../userAccess.css'
 
-export function LoginForm({setIsOnLogin, setIsLogged, setUser}) {
-
+export function LoginForm({setIsOnLogin}) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const { loading, error, data, refetch } = useQuery(Queries.getAllUsers)
 
-    setIsOnLogin(true)
+    const dispatch = useDispatch()
+
     useEffect(() =>{ refetch() }, [setIsOnLogin])
 
     const onChangeEmail = (e) => {
@@ -25,7 +27,7 @@ export function LoginForm({setIsOnLogin, setIsLogged, setUser}) {
             for (var i = 0; i < data.getUsers.length; i++) {
                 if (data.getUsers[i].email == email) {
                     if (data.getUsers[i].password == password) {
-                        setIsLogged(true)
+                        dispatch(setIsLoged(true))
                         var user = {
                             ID : data.getUsers[i].ID,
                             admin : data.getUsers[i].admin,
@@ -34,7 +36,7 @@ export function LoginForm({setIsOnLogin, setIsLogged, setUser}) {
                             password : data.getUsers[i].password,
                             surname : data.getUsers[i].surname
                         }
-                        setUser(user)
+                        dispatch(handleLogin(user))
                         const userJSON = JSON.stringify(user);
                         localStorage.setItem('user', userJSON);
                     }
