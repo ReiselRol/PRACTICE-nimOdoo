@@ -27,7 +27,7 @@ export function Navbar () {
                     <tbody>
                         <tr className='nav-distributionTableTr'>
                             <td className='nav-Hamburger' onClick={handleOnCLickHamburger}><img src={HAMBURGER_LOGO_URL} className='nav-Hamburger-img'/></td>
-                            <td className='nav-tdLogo'><NimOdooLogo/></td>
+                            <td className='nav-tdLogo'><NimOdooLogo linkable={true}/></td>
                             <td className='nav-tdTitleName'>{appName}</td>
                             <td><UserButton/></td>
                         </tr>

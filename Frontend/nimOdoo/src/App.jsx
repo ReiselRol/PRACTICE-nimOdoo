@@ -1,6 +1,6 @@
 import { AppFrame } from "./components/AppFrame/appFrame"
 import { NotFoundPage } from "./components/NotFoundPage/notFoundPage"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, RouterProvider, Route } from "react-router-dom"
 import { UserAccess } from "./components/UserAccess/userAccess"
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
@@ -23,17 +23,17 @@ export function App () {
     const ROUTER = createBrowserRouter([
         {
             path: '/',
-            element: <>Hola que tal?</>,
+            element: <AppFrame>
+                <>Hola que tal?</>
+                </AppFrame>,
             errorElement: <NotFoundPage/>
         },
     ])
 
     if (isLogged == false) return (<UserAccess/>)
     return (
-        <AppFrame>
             <RouterProvider router={ROUTER}>
-
+                
             </RouterProvider>
-        </AppFrame>
     )
 }
