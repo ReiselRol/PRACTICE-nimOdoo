@@ -14,10 +14,24 @@ export const LateralMenus = [
         ]
     },
     {
+        title: 'Enterprises',
+        submenu : [
+            {name: "See all enterprises", path: "/enterprise"},
+            {name: "Create a enterprise", path: "/enterprise/create"}
+        ]
+    },
+    {
         title: 'Sales',
         submenu : [
-            {name: "See all sales", path: "/sales"},
-            {name: "Create a sales", path: "/sales/create"}
+            {name: "See all sales", path: "/sale"},
+            {name: "Create a sales", path: "/sale/create"}
         ]
-    }
+    },
+    {
+        title: 'Sell Proposals',
+        submenu : [
+            {name: "See all S.P.", path: "/sell-proposal"},
+            {name: "Create a S.P.", path: "/sell-proposal/create"}
+        ]
+    },
 ]
