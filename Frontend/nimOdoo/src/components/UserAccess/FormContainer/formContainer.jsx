@@ -1,13 +1,13 @@
 import { FormSVG } from "./FormSVG/formSVG"
 import './formContainer.css'
-import { NimOdooLogo } from "../../NimOdooLogo/nimOdooLogo"
+import { NimOdooLogoDumb } from "../../NimOdooLogoDumb/nimOdooLogoDumb"
 
 export function FormContainer ({children}) {
     return (
         <>
             <FormSVG/>
             <div className="SpaceForForms">
-                <div className="nimodooCenter"><NimOdooLogo/></div>
+                <div className="nimodooCenter"><NimOdooLogoDumb/></div>
                 {children}
             </div>
         </>

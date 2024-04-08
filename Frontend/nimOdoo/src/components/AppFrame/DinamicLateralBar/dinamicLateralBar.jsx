@@ -5,8 +5,12 @@ export function DinamicLateralBar({children}) {
     const isVisible = useSelector((state) => state.AppGlobals.UI.isOpened)
     return (
         <>
+            <div className={'dlb-position ' + ( isVisible == true ? 'dlb-containerActived' : 'dlb-containerUnactived')}>
+                <div className='dlb-title'>Modules</div>
+                {children}
+            </div>
+            <div className={'dlb-container ' + ( isVisible == true ? 'dlb-containerActived' : 'dlb-containerUnactived')}/>
             <div className={'dlb-allBlacker' + ( isVisible == true ? 'dlb-allBlackerActived' : 'dlb-allBlackerUnctived')}/>
-            <div className={'dlb-container ' + ( isVisible == true ? 'dlb-containerActived' : 'dlb-containerUnactived')}>{children}</div>
         </>
     )
 }

@@ -1,4 +1,4 @@
-import { FormContainer } from "../UserAccess/FormContainer/formContainer"
+import { FormContainer } from "../../UserAccess/FormContainer/formContainer"
 
 export function NotFoundPage ({}) {
     return (

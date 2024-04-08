@@ -10,9 +10,33 @@
     filter: brightness(0.7);
     transition: width 0.5s ease-in-out;
 }
+.dlb-position {
+    position: fixed;
+    top: 10vh;
+    left: 0vw;
+    height: 91vh;
+    margin: 0;
+    padding: 0;
+    z-index: 1003;
+    transition: width 0.5s ease-in-out;
+}
 .dlb-containerUnactived {
     width: 7vw;
 }
 .dlb-containerActived {
     width: 19vw;
+}
+.dlb-title {
+    text-align: center;
+    color: white;
+    font-size: 1.6rem;
+    padding-right: 5%;
+    padding-left: 5%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: rgb(101, 146, 229);   
+    border: rgba(0, 0, 0, 0.44) solid 2px;
+    filter: brightness(1);
+    transition: filter 0.2s ease-in-out, height 1s ease-in-out;
 }
