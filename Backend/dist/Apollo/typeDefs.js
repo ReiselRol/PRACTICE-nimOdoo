@@ -34,9 +34,10 @@ const typeDefs = ` #graphql
     type SalesProposal {
         ID: String!
         proposerID: String!
+        productIDs: [String]!
         clientID: String!
-        creationDate: String!
-        state: Int
+        creationDate: String
+        state: Int!
     }
 
     type Query {
@@ -96,7 +97,8 @@ const typeDefs = ` #graphql
         addSalesProposal(
             proposerID: String!
             clientID: String!
-            state: Int
+            productIDs: [String]!
+            state: Int!
         ): SalesProposal
 
         deleteUser(userID: ID!): User

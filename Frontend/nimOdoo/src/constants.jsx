@@ -7,6 +7,9 @@ import { AllEnterprises, CreateEnterprise } from "./components/Pages/Enterprises
 import { AllSellProposals, CreateSellProposal } from "./components/Pages/SellProposals"
 import { AppFrame } from "./components/AppFrame/appFrame"
 import { NotFoundPage } from "./components/Pages/NotFoundPage/notFoundPage"
+import { Modules } from "./components/Pages/Modules/modules"
+import { Configurations } from "./components/Pages/Configurations"
+import { AllUsers, CreateUser } from "./components/Pages/Users"
 
 export const lowDisplaySize = '400px'
 export const BROWSE_ROUTER = createBrowserRouter([
@@ -63,6 +66,26 @@ export const BROWSE_ROUTER = createBrowserRouter([
     {
         path: '/sell-proposal/create',
         element: <AppFrame><CreateSellProposal/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/user',
+        element: <AppFrame><AllUsers/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/user/create',
+        element: <AppFrame><CreateUser/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/modules',
+        element: <AppFrame><Modules/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/configuration',
+        element: <AppFrame><Configurations/></AppFrame>,
         errorElement: <NotFoundPage/>
     },
 ])

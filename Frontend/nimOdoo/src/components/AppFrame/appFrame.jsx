@@ -2,7 +2,8 @@ import { Navbar } from "./Navbar/navbar"
 import { DinamicLateralBar } from "./DinamicLateralBar/dinamicLateralBar"
 import { DinamicBarSelector } from "./DinamicLateralBar/DinamicBarSelector/dinamicBarSelector"
 import { useSelector } from 'react-redux'
-import { LateralMenus } from "./constants"
+import { LateralMenus, QuickAccess } from "./constants"
+import { DinamicBarFolder } from "./DinamicLateralBar/DinamicBarFolder/dinamicBarFolder"
 import './appFrame.css'
 
 export function AppFrame({children}) {
@@ -13,13 +14,24 @@ export function AppFrame({children}) {
     return (
         <>
             <Navbar/>
-            <DinamicLateralBar>
-                {
-                    LateralMenus.map((apartados, index) => (
-                        <DinamicBarSelector title={apartados.title} subelements={apartados.submenu}/>
-                    ))
-                }
-            </DinamicLateralBar>
+                <DinamicLateralBar>
+                    <DinamicBarFolder title={'Quick Access'}>
+                    {
+                        QuickAccess.map((apartados, index) => (
+                            <DinamicBarSelector title={apartados.title} subelements={apartados.submenu}/>
+                        ))
+                    }
+                    </DinamicBarFolder>
+                    <DinamicBarFolder title={'Modules'}>
+                    {
+                        LateralMenus.map((apartados, index) => (
+                            <DinamicBarSelector title={apartados.title} subelements={apartados.submenu}/>
+                        ))
+                    }
+                    </DinamicBarFolder>
+                    <br/>
+                </DinamicLateralBar>
+                
             <div className={infoStyle}>{children}</div>
         </>
     )

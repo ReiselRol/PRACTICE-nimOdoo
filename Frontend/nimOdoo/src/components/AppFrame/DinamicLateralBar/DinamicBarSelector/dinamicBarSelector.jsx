@@ -29,7 +29,7 @@ export const DinamicBarSelector = ({title, subelements}) => {
                 <div className={"dinamic-slector-hidder " + (isOpened ? "dinamic-slector-opened" : "dinamic-slector-hidden")}>
                     {
                         subelements.map((element, index) => (
-                            <div className="dinamic-element" onClick={() => navigate(element.path)} key={title + ' - ' + index}>· {element.name}</div>
+                            <div className="dinamic-element" onClick={() => navigate(element.path)} key={title + ' - ' + index + ' - ' + element.name}>· {element.name}</div>
                         ))
                     }
                 </div>

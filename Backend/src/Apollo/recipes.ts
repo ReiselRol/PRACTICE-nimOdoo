@@ -40,6 +40,7 @@ const productSchema = new Schema({
 const salesProposalSchema = new Schema({
     ID : String,
     proposerID : String, // Client ID del que vende 
+    productIDs: [String], // List of product IDs
     clientID : String, // Client ID del que compra
     creationDate : String,
     state : Number // 0.- confirmed, 1.- pending, 2.- declined

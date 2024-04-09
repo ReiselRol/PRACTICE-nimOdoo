@@ -35,3 +35,21 @@ export const LateralMenus = [
         ]
     },
 ]
+
+export const QuickAccess = [
+    {
+        title: 'nimOdoo Pages',
+        submenu : [
+            {name: "Home", path: "/"},
+            {name: "All Modules", path: "/modules"},
+            {name: "Configurations", path: "/configuration"}
+        ]
+    },
+    {
+        title: 'Users',
+        submenu : [
+            {name: "Sa ell users", path: "/user"},
+            {name: "Create a user", path: "/user/create"},
+        ]
+    }
+]

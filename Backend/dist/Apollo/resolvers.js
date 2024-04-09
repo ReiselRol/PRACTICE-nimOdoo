@@ -72,6 +72,9 @@ const resolvers = {
             return savedProduct;
         },
         addSalesProposal: async (parent, args) => {
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')} ${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}:${currentDate.getSeconds().toString().padStart(2, '0')}`;
+            args.creationDate = formattedDate;
             const newSalesProposal = new salesProposalModel(args);
             const savedSalesProposal = await newSalesProposal.save();
             // Asignar el ID de la propuesta de venta al campo ID

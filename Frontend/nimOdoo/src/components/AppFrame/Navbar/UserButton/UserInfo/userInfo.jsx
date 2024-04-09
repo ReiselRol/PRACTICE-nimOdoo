@@ -17,17 +17,17 @@ export function UserInfo ({}) {
         <div className={classes}>
             <table className="user-info-table">
                 <tbody>
-                    <tr>
+                    <tr className="user-info-important-info">
                         <td>nimOdoo</td>
                         <td className="user-info-td-close" onClick={onClickLogOut}>Cerrar sesión</td>
                     </tr>
-                    <tr className="user-info-tr">
+                    <tr className="user-info-special-tr">
                         <td colSpan={2}>Nombre: {user.surname}, {user.name}</td>
                     </tr>
-                    <tr className="user-info-tr">
+                    <tr className="user-info-special-tr">
                         <td colSpan={2}>Email: {user.email}</td>
                     </tr>
-                    <tr className="user-info-tr">
+                    <tr className="user-info-special-tr">
                         <td colSpan={2}>Ver cuenta</td>
                     </tr>
                 </tbody>
