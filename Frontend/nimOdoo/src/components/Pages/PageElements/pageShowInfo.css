@@ -1,0 +1,42 @@
+.info-big-div {
+    width: 75vw;
+    min-height: 67vh;
+    height: auto;
+    margin-left: 5.75vw;
+    padding: 3%;
+    overflow: hidden;
+    border-radius: 50px;
+}
+.info-table{
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(#ffffff, #e2e2e2);
+    border: black solid 2px;
+}
+.info-title{
+    background: radial-gradient(#61b8d3, #255a7d);
+    text-align: center;
+    color: white;
+    font-size: 2.5rem;
+}
+.info-info{
+    background: radial-gradient(#bed2dd, #7d949a);
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+}
+.info-info-real-info {
+    transition: filter 0.33s ease-in-out;
+    background-color: #ecececa4;
+    filter: brightness(1);
+    font-size: 1.3rem;
+}
+.info-info-real-info:hover {
+    filter: brightness(1.4)
+}
+.info-info-real-info > td {
+    padding-left: 30px;
+}
+.info-info-real-info-par-info {
+    background-color: #dededea4;
+}

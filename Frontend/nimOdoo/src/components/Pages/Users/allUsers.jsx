@@ -12,7 +12,8 @@ export default function AllUsers ({}) {
     useEffect(() => { refetch() }, [])
 
     return (
-        loading == false && data != undefined ? (<Page Name={"All Users"}>
+        loading == false && data != undefined ? (
+        <Page Name={"All Users"}>
             <PageShowInfo
                 title="All Users"
                 infoOrder={USER_INFO_CONFIG}

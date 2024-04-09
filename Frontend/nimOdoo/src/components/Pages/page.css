@@ -1,4 +1,11 @@
 .page-class {
     padding-top: 2.5%;
     width: 100%;
+    background: linear-gradient(90deg,#00b3ff1e, #0077ff1e);
+    height: 84.9vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
