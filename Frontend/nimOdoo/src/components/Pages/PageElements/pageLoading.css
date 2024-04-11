@@ -1,0 +1,10 @@
+.the-loader {
+    position: absolute;
+    width: 100%;
+    padding-top: 8%;
+    top: 0;
+    left: 0;
+    color: rgb(28, 73, 255);
+    text-align: center;
+    font-size: 2rem;
+}

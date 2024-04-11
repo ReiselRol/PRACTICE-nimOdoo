@@ -1,15 +1,15 @@
 import { createBrowserRouter } from "react-router-dom"
 import { Home } from "./components/Pages/Home/home"
-import { AllClients, CreateClient } from "./components/Pages/Clients"
-import { AllProducts, CreateProduct } from "./components/Pages/Products"
+import { AllClients, CreateClient, ShowClient, EditClient } from "./components/Pages/Clients"
+import { AllProducts, CreateProduct, EditProduct, ShowProduct } from "./components/Pages/Products"
 import { AllSales, CreateSale } from "./components/Pages/Sales"
-import { AllEnterprises, CreateEnterprise } from "./components/Pages/Enterprises"
+import { AllEnterprises, CreateEnterprise, ShowEnterprise, EditEnterprise } from "./components/Pages/Enterprises"
 import { AllSellProposals, CreateSellProposal } from "./components/Pages/SellProposals"
 import { AppFrame } from "./components/AppFrame/appFrame"
 import { NotFoundPage } from "./components/Pages/NotFoundPage/notFoundPage"
 import { Modules } from "./components/Pages/Modules/modules"
 import { Configurations } from "./components/Pages/Configurations"
-import { AllUsers, CreateUser } from "./components/Pages/Users"
+import { AllUsers, CreateUser, EditUser, ShowUser } from "./components/Pages/Users"
 
 export const lowDisplaySize = '400px'
 export const BROWSE_ROUTER = createBrowserRouter([
@@ -21,6 +21,16 @@ export const BROWSE_ROUTER = createBrowserRouter([
     {
         path: '/client',
         element: <AppFrame><AllClients/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/client/:id/edit/',
+        element: <AppFrame><EditClient/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/client/:id/show/',
+        element: <AppFrame><ShowClient/></AppFrame>,
         errorElement: <NotFoundPage/>
     },
     {
@@ -36,6 +46,16 @@ export const BROWSE_ROUTER = createBrowserRouter([
     {
         path: '/product/create',
         element: <AppFrame><CreateProduct/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/product/:id/edit/',
+        element: <AppFrame><EditProduct/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/product/:id/show/',
+        element: <AppFrame><ShowProduct/></AppFrame>,
         errorElement: <NotFoundPage/>
     },
     {
@@ -59,6 +79,16 @@ export const BROWSE_ROUTER = createBrowserRouter([
         errorElement: <NotFoundPage/>
     },
     {
+        path: '/enterprise/:id/edit/',
+        element: <AppFrame><EditEnterprise/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/enterprise/:id/show/',
+        element: <AppFrame><ShowEnterprise/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
         path: '/sell-proposal',
         element: <AppFrame><AllSellProposals/></AppFrame>,
         errorElement: <NotFoundPage/>
@@ -76,6 +106,16 @@ export const BROWSE_ROUTER = createBrowserRouter([
     {
         path: '/user/create',
         element: <AppFrame><CreateUser/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/user/:id/edit/',
+        element: <AppFrame><EditUser/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/user/:id/show/',
+        element: <AppFrame><ShowUser/></AppFrame>,
         errorElement: <NotFoundPage/>
     },
     {

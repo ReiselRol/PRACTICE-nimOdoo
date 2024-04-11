@@ -27,14 +27,17 @@ const enterpriseSchema = new Schema({
     ID : String,
     name: String,
     phone: String,
+    address: String,
+    email: String,
+    cif: String,
 })
 
 const productSchema = new Schema({
     ID : String,
-    enterpriseFromID: String, // La ID de la empresa de la que proviene
     name: String,
     description: String,
-    enterpriseToID: String, // La ID de la empresa de la cual se le vende
+    stock: Number,
+    price: Number
 })
 
 const salesProposalSchema = new Schema({

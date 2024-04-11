@@ -48,7 +48,7 @@ export const QuickAccess = [
     {
         title: 'Users',
         submenu : [
-            {name: "Sa ell users", path: "/user"},
+            {name: "See all users", path: "/user"},
             {name: "Create a user", path: "/user/create"},
         ]
     }

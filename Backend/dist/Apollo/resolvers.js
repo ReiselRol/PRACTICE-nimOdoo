@@ -2,6 +2,26 @@ import mongoose from 'mongoose';
 import { userModel, clientModel, enterpriseModel, productModel, salesProposalModel } from './recipes.js';
 import { DEVELOPMENT_URI } from './config/ApolloConfig.js';
 mongoose.connect(DEVELOPMENT_URI, { dbName: 'nimodoo' });
+const generateRandomString = (length) => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+};
+const generateRandomNumber = () => {
+    const min = 100000000;
+    const max = 999999999;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+const generateRandomDouble = (min, max) => {
+    const random = Math.random() * (max - min) + min;
+    return parseFloat(random.toFixed(2));
+};
+const generateRandomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 const resolvers = {
     Query: {
         getUsers: async () => {
@@ -47,6 +67,27 @@ const resolvers = {
             await userModel.findByIdAndUpdate(savedUser._id, { ID: savedUser._id }, { new: true });
             return savedUser;
         },
+        fakeUser: async (parent, args) => {
+            var total = args.total;
+            if (total < 0)
+                total = 0;
+            var newElements = [];
+            for (var i = 0; i < total; i++) {
+                var info = {
+                    name: generateRandomString(6),
+                    surname: generateRandomString(10),
+                    password: generateRandomString(20),
+                    admin: false,
+                    email: generateRandomString(14) + "@" + generateRandomString(7) + "." + generateRandomString(3),
+                };
+                const newClient = new userModel(info);
+                const savedUser = await newClient.save();
+                savedUser.ID = savedUser._id.toString();
+                await userModel.findByIdAndUpdate(savedUser._id, { ID: savedUser._id }, { new: true });
+                newElements.push(savedUser);
+            }
+            return newElements;
+        },
         addClient: async (parent, args) => {
             const newClient = new clientModel(args);
             const savedClient = await newClient.save();
@@ -54,6 +95,27 @@ const resolvers = {
             savedClient.ID = savedClient._id.toString();
             await clientModel.findByIdAndUpdate(savedClient._id, { ID: savedClient._id }, { new: true });
             return savedClient;
+        },
+        fakeClient: async (parent, args) => {
+            var total = args.total;
+            if (total < 0)
+                total = 0;
+            var newElements = [];
+            for (var i = 0; i < total; i++) {
+                var info = {
+                    name: generateRandomString(6),
+                    surname: generateRandomString(10),
+                    email: generateRandomString(14) + "@" + generateRandomString(7) + "." + generateRandomString(3),
+                    phone: generateRandomNumber(),
+                    enterpriseID: null
+                };
+                const newClient = new clientModel(info);
+                const savedUser = await newClient.save();
+                savedUser.ID = savedUser._id.toString();
+                await clientModel.findByIdAndUpdate(savedUser._id, { ID: savedUser._id }, { new: true });
+                newElements.push(savedUser);
+            }
+            return newElements;
         },
         addEnterprise: async (parent, args) => {
             const newEnterprise = new enterpriseModel(args);
@@ -63,6 +125,27 @@ const resolvers = {
             await enterpriseModel.findByIdAndUpdate(savedEnterprise._id, { ID: savedEnterprise._id }, { new: true });
             return savedEnterprise;
         },
+        fakeEnterprise: async (parent, args) => {
+            var total = args.total;
+            if (total < 0)
+                total = 0;
+            var newElements = [];
+            for (var i = 0; i < total; i++) {
+                var info = {
+                    name: generateRandomString(6),
+                    phone: generateRandomNumber(),
+                    address: 'C/ ' + generateRandomString(6) + ' ' + generateRandomString(10),
+                    email: generateRandomString(14) + "@" + generateRandomString(7) + "." + generateRandomString(3),
+                    cif: generateRandomString(14)
+                };
+                const newClient = new enterpriseModel(info);
+                const savedUser = await newClient.save();
+                savedUser.ID = savedUser._id.toString();
+                await enterpriseModel.findByIdAndUpdate(savedUser._id, { ID: savedUser._id }, { new: true });
+                newElements.push(savedUser);
+            }
+            return newElements;
+        },
         addProduct: async (parent, args) => {
             const newProduct = new productModel(args);
             const savedProduct = await newProduct.save();
@@ -70,6 +153,26 @@ const resolvers = {
             savedProduct.ID = savedProduct._id.toString();
             await productModel.findByIdAndUpdate(savedProduct._id, { ID: savedProduct._id }, { new: true });
             return savedProduct;
+        },
+        fakeProduct: async (parent, args) => {
+            var total = args.total;
+            if (total < 0)
+                total = 0;
+            var newElements = [];
+            for (var i = 0; i < total; i++) {
+                var info = {
+                    name: generateRandomString(10),
+                    description: generateRandomString(60),
+                    stock: generateRandomInt(12, 12763),
+                    price: generateRandomDouble(0.99, 5000.0)
+                };
+                const newClient = new productModel(info);
+                const savedUser = await newClient.save();
+                savedUser.ID = savedUser._id.toString();
+                await productModel.findByIdAndUpdate(savedUser._id, { ID: savedUser._id }, { new: true });
+                newElements.push(savedUser);
+            }
+            return newElements;
         },
         addSalesProposal: async (parent, args) => {
             const currentDate = new Date();
@@ -82,20 +185,20 @@ const resolvers = {
             await salesProposalModel.findByIdAndUpdate(savedSalesProposal._id, { ID: savedSalesProposal._id }, { new: true });
             return savedSalesProposal;
         },
-        deleteUser: async (parent, { userID }) => {
-            return userModel.findById(userID).then(user => user.deleteOne());
+        deleteUser: async (parent, { ID }) => {
+            return userModel.findById(ID).then(user => user.deleteOne());
         },
-        deleteClient: async (parent, { clientID }) => {
-            return clientModel.findById(clientID).then(client => client.deleteOne());
+        deleteClient: async (parent, { ID }) => {
+            return clientModel.findById(ID).then(client => client.deleteOne());
         },
-        deleteEnterprise: async (parent, { enterpriseID }) => {
-            return enterpriseModel.findById(enterpriseID).then(enterprise => enterprise.deleteOne());
+        deleteEnterprise: async (parent, { ID }) => {
+            return enterpriseModel.findById(ID).then(enterprise => enterprise.deleteOne());
         },
-        deleteProduct: async (parent, { productID }) => {
-            return productModel.findById(productID).then(product => product.deleteOne());
+        deleteProduct: async (parent, { ID }) => {
+            return productModel.findById(ID).then(product => product.deleteOne());
         },
-        deleteSalesProposal: async (parent, { salesProposalID }) => {
-            return salesProposalModel.findById(salesProposalID).then(salesProposal => salesProposal.deleteOne());
+        deleteSalesProposal: async (parent, { ID }) => {
+            return salesProposalModel.findById(ID).then(salesProposal => salesProposal.deleteOne());
         },
     },
 };

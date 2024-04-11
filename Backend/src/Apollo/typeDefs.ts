@@ -3,9 +3,9 @@ const typeDefs = ` #graphql
         ID: String!
         name: String!
         surname: String
-        email: String!
         password: String!
         admin: Boolean!
+        email: String!
     }
 
     type Client {
@@ -14,21 +14,24 @@ const typeDefs = ` #graphql
         surname: String
         email: String!
         phone: String!
-        enterpriseID: String!
+        enterpriseID: String
     }
 
     type Enterprise {
         ID: String!
         name: String!
         phone: String!
+        address: String!
+        email: String!
+        cif: String!
     }
 
     type Product {
         ID: String!
         name: String!
         description: String
-        enterpriseFromID: String
-        enterpriseToID: String
+        stock: Int!
+        price: Float!
     }
 
     type SalesProposal {
@@ -74,6 +77,10 @@ const typeDefs = ` #graphql
             admin: Boolean!
         ): User
 
+        fakeUser(    
+            total: Int!
+        ): [User]
+
         addClient(
             name: String!
             surname: String
@@ -82,17 +89,32 @@ const typeDefs = ` #graphql
             enterpriseID: String
         ): Client
 
+        fakeClient(    
+            total: Int!
+        ): [Client]
+
         addEnterprise(
             name: String!
             phone: String!
+            address: String!
+            email: String!
+            cif: String!
         ): Enterprise
+
+        fakeEnterprise(    
+            total: Int!
+        ): [Enterprise]
 
         addProduct(
             name: String!
             description: String
-            enterpriseFromID: String
-            enterpriseToID: String
+            stock: Int!
+            price: Float!
         ): Product
+
+        fakeProduct(    
+            total: Int!
+        ): [Product]
 
         addSalesProposal(
             proposerID: String!
@@ -101,11 +123,11 @@ const typeDefs = ` #graphql
             state: Int!
         ): SalesProposal
 
-        deleteUser(userID: ID!): User
-        deleteClient(clientID: ID!): Client
-        deleteEnterprise(enterpriseID: ID!): Enterprise
-        deleteProduct(productID: ID!): Product
-        deleteSalesProposal(salesProposalID: ID!): SalesProposal
+        deleteUser(ID: ID!): User
+        deleteClient(ID: ID!): Client
+        deleteEnterprise(ID: ID!): Enterprise
+        deleteProduct(ID: ID!): Product
+        deleteSalesProposal(ID: ID!): SalesProposal
     }
 `
 export default typeDefs
