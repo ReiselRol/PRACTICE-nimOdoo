@@ -16,6 +16,9 @@ export const appSlice = createSlice({
       password: "",
       name: "",
       surname:"",
+    },
+    Modules: {
+      Actived: []
     }
   },
   reducers: {
@@ -36,7 +39,11 @@ export const appSlice = createSlice({
       localStorage.removeItem('user')
       state.User = null
       state.UI.isLogged = false
-    }
+    },
+
+    //Modules
+    setNewModul: (state, action) => { if (!state.Modules.Actived.includes(action.payload)) state.Modules.Actived.push(action.payload) },
+    deleteModul: (state,action) => { if (state.Modules.Actived.includes(action.payload)) state.Modules.Actived = state.Modules.Actived.filter(item => item !== action.payload) }
   },
 })
 
@@ -50,6 +57,8 @@ export const {
   handleLogOut,
   handleLogin,
   closeAll,
-  handleOpenLateralBarPosition
+  handleOpenLateralBarPosition,
+  setNewModul,
+  deleteModul
 } = appSlice.actions
 export default appSlice.reducer

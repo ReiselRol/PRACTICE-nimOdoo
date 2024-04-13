@@ -3,23 +3,27 @@ import { UserAccess } from "./components/UserAccess/userAccess"
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { setIsLoged, setUser } from "./redux/Slices/AppSlice"
-import { BROWSE_ROUTER } from "./constants"
-
+import { prepareURLModules } from "./App.helper"
+import { PageLoading } from "./components/Pages/PageElements"
 
 export function App () {
 
     const isLogged = useSelector((state) => state.AppGlobals.UI.isLogged)
+    const modulesConfig = useSelector((state) => state.AppGlobals.Modules.Actived)
+    const user = useSelector((state) => state.AppGlobals.User)
     const dispatch = useDispatch()
 
     useEffect(() => {
         const userJSON = localStorage.getItem('user');
         if (userJSON != null) {
-            dispatch(setIsLoged(true))
             dispatch(setUser(userJSON))
+            dispatch(setIsLoged(true))
         }
     }, [])
 
-    const ROUTER = BROWSE_ROUTER
-
-    return (isLogged == false) ? <UserAccess/> : <RouterProvider router={ROUTER}/>
+    if (isLogged == false) return  <UserAccess/>
+    if (user != null) {
+        const ROUTER = prepareURLModules(modulesConfig, user.admin)
+        return <RouterProvider router={ROUTER}/>
+    } else return <PageLoading/>
 }
