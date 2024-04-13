@@ -2,9 +2,9 @@ import { createBrowserRouter } from "react-router-dom"
 import { Home } from "./components/Pages/Home/home"
 import { AllClients, CreateClient, ShowClient, EditClient } from "./components/Pages/Clients"
 import { AllProducts, CreateProduct, EditProduct, ShowProduct } from "./components/Pages/Products"
-import { AllSales, CreateSale } from "./components/Pages/Sales"
+import { AllSales, CreateSale, EditSale, ShowSale } from "./components/Pages/Sales"
 import { AllEnterprises, CreateEnterprise, ShowEnterprise, EditEnterprise } from "./components/Pages/Enterprises"
-import { AllSellProposals, CreateSellProposal } from "./components/Pages/SellProposals"
+import { AllSellProposals, CreateSellProposal, ShowSellProposal, EditSellProposal } from "./components/Pages/SellProposals"
 import { AppFrame } from "./components/AppFrame/appFrame"
 import { NotFoundPage } from "./components/Pages/NotFoundPage/notFoundPage"
 import { Modules } from "./components/Pages/Modules/modules"
@@ -69,6 +69,16 @@ export const BROWSE_ROUTER = createBrowserRouter([
         errorElement: <NotFoundPage/>
     },
     {
+        path: '/sale/:id/edit/',
+        element: <AppFrame><EditSale/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/sale/:id/show/',
+        element: <AppFrame><ShowSale/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
         path: '/enterprise',
         element: <AppFrame><AllEnterprises/></AppFrame>,
         errorElement: <NotFoundPage/>
@@ -96,6 +106,16 @@ export const BROWSE_ROUTER = createBrowserRouter([
     {
         path: '/sell-proposal/create',
         element: <AppFrame><CreateSellProposal/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/sell-proposal/:id/edit/',
+        element: <AppFrame><EditSellProposal/></AppFrame>,
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/sell-proposal/:id/show/',
+        element: <AppFrame><ShowSellProposal/></AppFrame>,
         errorElement: <NotFoundPage/>
     },
     {

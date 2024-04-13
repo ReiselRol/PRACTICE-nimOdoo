@@ -20,7 +20,6 @@ export default function AllProducts ({}) {
                     queryForDelete={Queries.deleteProduct}
                     refecth={refetch}
                     linkToCreate="/product/"
-                    fakerQuery={Queries.fakeProduct}
                     />
             </Page>
         ) : <PageLoading/>

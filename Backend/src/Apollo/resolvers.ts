@@ -63,6 +63,12 @@ const resolvers = {
         getSalesProposalByID: async (parent, { salesProposalID }) => {
             return salesProposalModel.findById(salesProposalID);
         },
+        getSells: async () => {
+            return salesProposalModel.find({ state: 0 });
+        },
+        getSellByID: async (parent, { salesProposalID }) => {
+            return salesProposalModel.findById(salesProposalID);
+        },
     },
     Mutation: {
         addUser: async (parent, args) => {

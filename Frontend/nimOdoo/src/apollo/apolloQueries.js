@@ -141,6 +141,32 @@ export const getSalesProposalByID = gql`
   }
 `;
 
+export const getAllSellsProposals = gql`
+  query GetSellsProposals {
+    getSalesProposals {
+      ID
+      proposerID
+      productIDs
+      clientID
+      creationDate
+      state
+    }
+  }
+`;
+
+export const getSellProposalByID = gql`
+  query GetSellProposalByID($salesProposalID: ID!) {
+    getSalesProposalByID(salesProposalID: $salesProposalID) {
+      ID
+      proposerID
+      productIDs
+      clientID
+      creationDate
+      state
+    }
+  }
+`;
+
 
 export const addUser = gql`
 mutation Mutation($name: String!, $surname: String!, $email: String!, $password: String!, $admin: Boolean!) {

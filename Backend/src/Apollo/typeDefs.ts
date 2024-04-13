@@ -66,6 +66,11 @@ const typeDefs = ` #graphql
         getSalesProposals: [SalesProposal!]!
     
         getSalesProposalByID(salesProposalID: ID!): SalesProposal!
+
+        getSells: [SalesProposal!]!
+    
+        getSellByID(salesProposalID: ID!): SalesProposal!
+
     }
 
     type Mutation {

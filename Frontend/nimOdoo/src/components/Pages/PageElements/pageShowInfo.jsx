@@ -13,8 +13,7 @@ export default function PageShowInfo ({
     linkToCreate,
     queryForDelete,
     refecth,
-    fakerQuery,
-    fakeable
+    fakerQuery = undefined,
 }) {
     const [loading2, setLoading2] = useState(true)
     const [infoV2, setInfoToShow] = useState([])
@@ -22,7 +21,23 @@ export default function PageShowInfo ({
     const [searchBy, setSearchBy] = useState(infoOrder[0][0])
     const navigate = useNavigate()
     const [deleter] = useMutation(queryForDelete)
-    const [faker] = useMutation(fakerQuery)
+    var fakeable = false
+    var fakeInfo = () => {}
+    if (fakerQuery !== undefined) {
+        const [faker] = useMutation(fakerQuery)
+        fakeable = true
+        var fakeInfo = () => {
+            setLoading2(true)
+            faker({
+                variables: {
+                    total : 5
+                }
+            }).finally(() => {
+                refecth()
+                setLoading2(false)
+            })
+        }
+    }
 
     const deleteElement = (elementID) => {
         setLoading2(true)
@@ -36,23 +51,16 @@ export default function PageShowInfo ({
         })
     }
 
-    const fakeInfo = () => {
-        setLoading2(true)
-        faker({
-            variables: {
-                total : 5
-            }
-        }).finally(() => {
-            refecth()
-            setLoading2(false)
-        })
-    }
-
     const showInfo = (info, howToTractIt) => {
         var infoToShow = info
         if (howToTractIt == "Password") infoToShow = "········"
         else if (howToTractIt == "Boolean") infoToShow = (info == true) ? "Yes" : "No"
         else if (howToTractIt == "Euro") infoToShow += "€"
+        else if (howToTractIt == "Status") {
+            if (info == 0) infoToShow = "Confirmed"
+            else if (info == 0) infoToShow = "Pending"
+            else infoToShow = "Declined"
+        }
         if (infoToShow.length > 30) infoToShow = infoToShow.substring(0, 30) + '...';
         return infoToShow
     }
@@ -147,7 +155,7 @@ export default function PageShowInfo ({
                     </tr>
                     {
                         (infoV2.length > 0) ? infoV2.map((eachInfo, firtsIndex) => (
-                            <tr className={'info-info-real-info ' + ((firtsIndex % 2 == 0) ? "info-info-real-info-par-info" : "")} key={firtsIndex + " - info"}>
+                            <tr className={'info-info-real-info ' + ((firtsIndex % 2 == 0) ? "info-info-real-info-par-info" : "")} key={firtsIndex + " - info - "}>
                                 {
                                     infoOrder.map((eachPart, index) => (
                                         <td style={{wordWrap: 'break-word', overflow: 'hidden', maxWidth: (100 / (infoOrder.length + 1)) + '%'}} onClick={() => { navigate(linkToCreate + eachInfo["ID"] + "/show")}} key={firtsIndex + " - " + index}>{showInfo(eachInfo[eachPart[0]], eachPart[2])}</td>
