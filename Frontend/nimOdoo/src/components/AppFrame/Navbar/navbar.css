@@ -5,8 +5,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    font-weight: 500;
-    background: linear-gradient(90deg,#00b3ff, #0077ff);
+background: linear-gradient(90deg,#00b3ff, #0077ff);    font-weight: 500;
+    
     z-index: 2000;
 }
 .nav-distributionTable {
@@ -36,5 +36,4 @@
     width: 90vw;
     padding-left: 3vw;
     color: white;
-
 }

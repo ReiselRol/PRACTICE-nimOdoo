@@ -18,7 +18,7 @@ export const appSlice = createSlice({
       surname:"",
     },
     Modules: {
-      Actived: []
+      Actived: ["user"]
     }
   },
   reducers: {
@@ -42,8 +42,21 @@ export const appSlice = createSlice({
     },
 
     //Modules
-    setNewModul: (state, action) => { if (!state.Modules.Actived.includes(action.payload)) state.Modules.Actived.push(action.payload) },
-    deleteModul: (state,action) => { if (state.Modules.Actived.includes(action.payload)) state.Modules.Actived = state.Modules.Actived.filter(item => item !== action.payload) }
+    setAllModules: (state, action) => { state.Modules.Actived = action.payload },
+    setNewModul: (state, action) => {
+      var actuallConfig = [...state.Modules.Actived]
+      if (!actuallConfig.includes(action.payload)) actuallConfig.push(action.payload)
+      state.Modules.Actived = actuallConfig
+      const newConfig = JSON.stringify(state.Modules.Actived)
+      localStorage.setItem('nimOdooConfig', newConfig)
+    },
+    deleteModul: (state,action) => { 
+      var actuallConfig = [...state.Modules.Actived]
+      if (actuallConfig.includes(action.payload)) actuallConfig = actuallConfig.filter(item => item !== action.payload)
+      state.Modules.Actived = actuallConfig
+      const newConfig = JSON.stringify(state.Modules.Actived)
+      localStorage.setItem('nimOdooConfig', newConfig)
+    }
   },
 })
 
@@ -59,6 +72,7 @@ export const {
   closeAll,
   handleOpenLateralBarPosition,
   setNewModul,
-  deleteModul
+  deleteModul,
+  setAllModules
 } = appSlice.actions
 export default appSlice.reducer

@@ -35,10 +35,10 @@ export const getModulesOptions = (modulesConfig) => {
             })
         } else if (modulesConfig[module] == "sell-proposal") {
             allModules.push({
-                title: 'Sales',
+                title: 'Sell proposals',
                 submenu : [
-                    {name: "See all sales", path: "/sale"},
-                    {name: "Create a sales", path: "/sale/create"}
+                    {name: "See all S.P.", path: "/sell-proposal"},
+                    {name: "Create a S.P.", path: "/sell-proposal/create"}
                 ]
             })
         }

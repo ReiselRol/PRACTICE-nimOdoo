@@ -135,7 +135,7 @@ export const prepareURLModules = (modulesConfig, admin) => {
                 element: <AppFrame><ShowSellProposal/></AppFrame>,
                 errorElement: <NotFoundPage/>
             })
-        } else if (modulesConfig[module] == "user" && admin == true) {
+        } else if (admin == true) {
             allURL.push({
                 path: '/user',
                 element: <AppFrame><AllUsers/></AppFrame>,

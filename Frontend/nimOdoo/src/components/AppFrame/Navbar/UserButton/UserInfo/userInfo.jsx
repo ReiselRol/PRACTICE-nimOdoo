@@ -1,14 +1,17 @@
 import { useSelector, useDispatch } from "react-redux"
 import { handleLogOut, closeAll } from "../../../../../redux/Slices/AppSlice"
+import { useNavigate } from "react-router-dom"
 import './userInfo.css'
 
 export function UserInfo ({}) {
     const user = useSelector((state) => state.AppGlobals.User)
     const isUserInfoOppened = useSelector((state) => state.AppGlobals.UI.isUserInfoOppened)
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const onClickLogOut = () => {
         dispatch(handleLogOut())
         dispatch(closeAll())
+        navigate("/")
     }
 
     var classes = (isUserInfoOppened == true) ? "user-info-encapsuler user-info-encapsuler-actived" : "user-info-encapsuler user-info-encapsuler-unctived"

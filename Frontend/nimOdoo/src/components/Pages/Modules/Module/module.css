@@ -1,0 +1,95 @@
+.module-img {
+    width: 100px;
+    height: 100px;
+}
+.module-enapsules {
+    width: 20vw;
+    height: auto;
+    text-align: center;
+    padding-top: 0px;
+    filter: brightness(1);
+    transition: filter 0.3s ease-in-out;
+    margin: 25px;
+    background: linear-gradient(34deg,#00b3ff, #2189ff);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: #0163d4 solid 2px;
+}
+.module-enapsules:hover {
+    filter: brightness(1.14);
+}
+.module-title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: linear-gradient(34deg,#b7e9ff, #94c6ff);
+    font-size: 1.55rem;
+    margin-bottom: 20px;
+    border-bottom: #0163d4 solid 2px;
+    font-weight: 800;
+}
+.module-btn-encapsuler {
+    margin-top: 25px;
+    text-align: right;
+    padding-right: 20px;
+}
+.module-info-i-swear {
+    padding-bottom: 20px;
+}
+.module-img-encapsuler{
+    background-color: rgba(255, 255, 255, 0.823);
+    margin: 20px;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.module-add-btn{
+    background-color: rgb(0, 154, 3);
+    color: white;
+    transition: background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    filter: brightness(1);
+    font-size: 1rem;
+    border-radius: 0px;
+}
+.module-add-btn:hover {
+    background-color: rgb(47, 255, 57);
+    border-radius: 10px;
+}
+
+.module-remove-btn{
+    background-color: rgb(154, 0, 0);
+    color: white;
+    transition: background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    filter: brightness(1);
+    font-size: 1rem;
+    border-radius: 0px;
+    margin-left: 10px;
+}
+.module-remove-btn:hover {
+    background-color: rgb(255, 47, 47);
+    border-radius: 10px;
+}
+
+.module-show-btn{
+    background-color: #237eba;
+    color: white;
+    transition: background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    filter: brightness(1);
+    font-size: 1rem;
+    border-radius: 0px;
+}
+.module-show-btn:hover {
+    background-color: #62b6ee;
+    border-radius: 10px;
+}
+.module-na-btn{
+    background-color: #606060;
+    color: white;
+    transition: background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    filter: brightness(1);
+    font-size: 1rem;
+    border-radius: 0px;
+}
+.module-na-btn:hover {
+    background-color: #777777;
+    border-radius: 10px;
+}

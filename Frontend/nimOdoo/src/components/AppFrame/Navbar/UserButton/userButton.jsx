@@ -5,8 +5,11 @@ import './userButton.css'
 
 export function UserButton ({}) {
     const dispatch = useDispatch()
+    const handleOnClick = () => {
+        dispatch(handleUserInfo())
+    }
 
     return (
-        <img src={USERICON_LOGO_URL} onClick={() => dispatch(handleUserInfo())} className="ub-userIconImg"/>
+        <img src={USERICON_LOGO_URL} onClick={handleOnClick} className="ub-userIconImg"/>
     )
 }
