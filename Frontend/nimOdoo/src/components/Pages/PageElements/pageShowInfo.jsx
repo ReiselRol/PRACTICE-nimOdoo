@@ -84,7 +84,7 @@ export default function PageShowInfo ({
             else if (info == 0) infoToShow = "Pending"
             else infoToShow = "Declined"
         }
-        const maxChars = (hasActions == false) ? 50 : 30
+        const maxChars = (hasActions == false) ? 70 : 30
         if (infoToShow.length > maxChars) infoToShow = infoToShow.substring(0, maxChars) + '...';
         return infoToShow
     }

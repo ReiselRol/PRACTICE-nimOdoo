@@ -42,7 +42,6 @@ export const QuickAccess = [
         submenu : [
             {name: "Home", path: "/"},
             {name: "All Modules", path: "/modules"},
-            {name: "Configurations", path: "/configuration"}
         ]
     },
     {

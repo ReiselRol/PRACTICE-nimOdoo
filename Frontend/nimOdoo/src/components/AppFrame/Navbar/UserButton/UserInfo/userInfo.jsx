@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux"
 import { handleLogOut, closeAll } from "../../../../../redux/Slices/AppSlice"
 import { useNavigate } from "react-router-dom"
+import { useMutation } from '@apollo/client'
+import * as Queries from "../../../../../apollo/apolloQueries"
 import './userInfo.css'
 
 export function UserInfo ({}) {
@@ -8,10 +10,20 @@ export function UserInfo ({}) {
     const isUserInfoOppened = useSelector((state) => state.AppGlobals.UI.isUserInfoOppened)
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [logger] = useMutation(Queries.addLog)
+
     const onClickLogOut = () => {
+        var email = user.email
         dispatch(handleLogOut())
         dispatch(closeAll())
         navigate("/")
+        logger({
+            variables: {
+                userName: "System",
+                userId: " ",
+                message: "The user with email " + email + " has log out successfully!" 
+            }
+        })
     }
 
     var classes = (isUserInfoOppened == true) ? "user-info-encapsuler user-info-encapsuler-actived" : "user-info-encapsuler user-info-encapsuler-unctived"

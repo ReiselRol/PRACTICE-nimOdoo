@@ -13,6 +13,8 @@ export function RegisterForm ({setIsOnLogin, setIsLogged, setUser}) {
     const [addUser] = useMutation(Queries.addUser);
     const [registredSuccessfully, setRegistredSuccessfully] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [logger] = useMutation(Queries.addLog)
+    const [errorVisible, setErrorVisible] = useState(false)
 
     const onChangeEmail = (e) => { setEmail(e.target.value.toLowerCase()) }
     const onChangePassword = (e) => { setPassword(e.target.value) }
@@ -37,11 +39,25 @@ export function RegisterForm ({setIsOnLogin, setIsLogged, setUser}) {
                     name: name,
                     surname: surname
                 }
+            }).then((response) => {
+                logger({
+                    variables: {
+                        userName: "System",
+                        userId: " ",
+                        message: "The user with email " + email+ " was added successfully!" 
+                    }
+                })
+                setErrorVisible(false)
+            }).catch(() => {
+                setErrorVisible(true)
             }).finally(response => {
                 setLoading(false)
                 setRegistredSuccessfully(true)
             })
-        } else setLoading(false)
+        } else {
+            setLoading(false)
+            setErrorVisible(true)
+        }
     } 
 
     return (
@@ -68,6 +84,16 @@ export function RegisterForm ({setIsOnLogin, setIsLogged, setUser}) {
                         <td><label>Confirm password</label></td>
                         <td><input type="password" name="password" value={confirmPassword} onChange={onChangeConfirmPassword}/></td>
                     </tr>
+                    {
+                        (errorVisible) && <tr className="error-tr">
+                            <td colSpan={2}>Fields are missing or the email is already in use.</td>
+                        </tr>
+                    }
+                    {
+                        (registredSuccessfully && errorVisible == false) && <tr className="success-tr">
+                            <td colSpan={2} >The user was created successfully.</td>
+                        </tr>
+                    }
                     <tr>
                         <td><button onClick={tryRegister}>Register</button></td>
                         <td id="linkTd"><a onClick={() => setIsOnLogin(true)}>I have account</a></td>

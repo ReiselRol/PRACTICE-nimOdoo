@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { userModel, clientModel, enterpriseModel, productModel, salesProposalModel, logModel, nimOdooModule } from './recipes.js';
-import { PRODUCTION_URI } from './config/ApolloConfig.js';
-mongoose.connect(PRODUCTION_URI, { dbName: 'nimodoo' });
+import { DEVELOPMENT_URI } from './config/ApolloConfig.js';
+mongoose.connect(DEVELOPMENT_URI, { dbName: 'nimodoo' });
 const generateRandomString = (length) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';

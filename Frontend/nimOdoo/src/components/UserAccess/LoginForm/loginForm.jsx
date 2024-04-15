@@ -4,12 +4,15 @@ import * as Queries from "../../../apollo/apolloQueries";
 import { useDispatch } from "react-redux"
 import { setIsLoged, handleLogin } from "../../../redux/Slices/AppSlice";
 import { PageLoading } from "../../Pages/PageElements";
+import { useMutation } from '@apollo/client'
 import '../userAccess.css'
 
 export function LoginForm({setIsOnLogin}) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [errorVisible, setErrorVisible] = useState(false)
     const { loading, error, data, refetch } = useQuery(Queries.getAllUsers)
+    const [logger] = useMutation(Queries.addLog)
 
     const dispatch = useDispatch()
 
@@ -24,6 +27,7 @@ export function LoginForm({setIsOnLogin}) {
     }
 
     const tryLogIn = () => {
+        var founded = false
         if (email != "" && password != "" && !loading && !error) {
             for (var i = 0; i < data.getUsers.length; i++) {
                 if (data.getUsers[i].email == email) {
@@ -39,11 +43,20 @@ export function LoginForm({setIsOnLogin}) {
                         }
                         dispatch(handleLogin(user))
                         localStorage.setItem('user', user.ID);
+                        founded = true
+                        logger({
+                            variables: {
+                                userName: "System",
+                                userId: " ",
+                                message: "The user with email " + email + " has logged successfully!" 
+                            }
+                        })
                     }
                     break
                 }
             }
         }
+        setErrorVisible(!founded)
     }
 
     return (
@@ -58,6 +71,11 @@ export function LoginForm({setIsOnLogin}) {
                             <td><label>Password</label></td>
                             <td><input type="password" name="password" value={password} onChange={onChangePassword}/></td>
                         </tr>
+                        {
+                        (errorVisible) && <tr className="error-tr">
+                            <td colSpan={2}>The email or password is not valid.</td>
+                        </tr>
+                        }
                         <tr>
                             <td><button onClick={tryLogIn}>Log In</button></td>
                             <td id="linkTd"><a onClick={() => setIsOnLogin(false)}>I dont have account</a></td>

@@ -5,12 +5,14 @@ import { useSelector, useDispatch } from "react-redux"
 import { setIsLoged, handleLogin, setAllModules } from "./redux/Slices/AppSlice"
 import { prepareURLModules } from "./App.helper"
 import { PageLoading } from "./components/Pages/PageElements"
+import { useMutation } from '@apollo/client'
 import { useQuery } from "@apollo/client"
 import * as Queries from "./apollo/apolloQueries"
 
 export function App () {
 
     const isLogged = useSelector((state) => state.AppGlobals.UI.isLogged)
+    const [logger] = useMutation(Queries.addLog)
     const modulesConfig = useSelector((state) => state.AppGlobals.Modules.Actived)
     const user = useSelector((state) => state.AppGlobals.User)
     const userJSON = localStorage.getItem('user');
@@ -38,6 +40,13 @@ export function App () {
                     if (data.getUsers[i].ID == userJSON) {
                         dispatch(handleLogin(data.getUsers[i]))
                         dispatch(setIsLoged(true))
+                        logger({
+                            variables: {
+                                userName: "System",
+                                userId: " ",
+                                message: "The user with email " + data.getUsers[i].email + " has logged successfully!" 
+                            }
+                        })
                         break
                     }
                 }

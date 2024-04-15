@@ -51,7 +51,6 @@ export const getQuickAccess = (admin) => {
         submenu : [
             {name: "Home", path: "/"},
             {name: "All Modules", path: "/modules"},
-            {name: "Configurations", path: "/configuration"}
         ]
     }]
     if (admin == true) {
