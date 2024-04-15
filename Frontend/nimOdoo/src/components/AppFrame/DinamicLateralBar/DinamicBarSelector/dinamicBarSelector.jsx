@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
-import { handleOpenLateralBarPosition } from "../../../../redux/Slices/AppSlice"
+import { handleOpenLateralBarPosition, closeAll } from "../../../../redux/Slices/AppSlice"
 import './dinamicBarSelector.css'
 
 export const DinamicBarSelector = ({title, subelements}) => {
@@ -22,6 +22,11 @@ export const DinamicBarSelector = ({title, subelements}) => {
         if (!isOpenRightNow == true) dispatch(handleOpenLateralBarPosition())
     }
 
+    const navigateAndClose = (path) => {
+        navigate(path)
+        dispatch(closeAll())
+    }
+
     return (
         <>
             <div className="dinamic-selector">
@@ -29,7 +34,7 @@ export const DinamicBarSelector = ({title, subelements}) => {
                 <div className={"dinamic-slector-hidder " + (isOpened ? "dinamic-slector-opened" : "dinamic-slector-hidden")}>
                     {
                         subelements.map((element, index) => (
-                            <div className="dinamic-element" onClick={() => navigate(element.path)} key={title + ' - ' + index + ' - ' + element.name}>· {element.name}</div>
+                            <div className="dinamic-element" onClick={() => navigateAndClose(element.path)} key={title + ' - ' + index + ' - ' + element.name}>· {element.name}</div>
                         ))
                     }
                 </div>
