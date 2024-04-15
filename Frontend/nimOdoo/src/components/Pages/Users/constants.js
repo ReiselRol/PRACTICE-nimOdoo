@@ -9,3 +9,10 @@ export const LOG_INFO_CONFIG = [
     ["UserID", "User ID", "Text"],
     ["Message", "Message", "Text"],
 ]
+export const SHOW_USER_INFO_CONFIG = [
+    ["ID", "ID", "Text"],
+    ["name", "Name", "Text"],
+    ["surname", "Surname", "Text"],
+    ["email", "Email", "Text"],
+    ["admin", "Is admin", "Boolean"]
+]

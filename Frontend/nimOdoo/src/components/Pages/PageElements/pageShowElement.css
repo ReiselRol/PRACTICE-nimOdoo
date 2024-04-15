@@ -1,0 +1,97 @@
+.userFormTablez {
+    position: absolute;
+    width: 60vw;
+    height: 63vh;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: rgb(255, 255, 255) !important;
+    vertical-align: middle;
+    text-align: left;
+    border: black solid 3px;
+    font-size: 1.5rem;
+    word-wrap: break-word;
+}
+.userFormTablez input {
+    padding: 0.3%;
+    border: rgba(0, 0, 0, 0.485) solid 2px;
+    border-radius: 9px;
+    height: 4vh;
+    width: 30vw;
+    margin-left: 11vw;
+    transition: border ease-in-out 0.4s;
+}
+.userFormTablez input:enabled {
+    border: rgba(0, 102, 255, 0.485) solid 2px;
+}
+.userFormTablez label {
+    width: 15vw;
+    font-size: larger;
+}
+.userFormTablez tr {
+    width: 100%;
+    filter: brightness(1);
+    transition: filter 0.3s ease-in-out;
+    background-color: azure;
+}
+.userFormTablez td {
+    width: 50%;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.userFormTablez tr:hover {
+    filter: brightness(0.8);
+}
+#tiitle {
+    background-color: rgba(0, 102, 255, 0.859) !important;
+    margin-left: 0px !important;
+    width: 100%;
+    text-align: center;
+    padding-left: 0;
+    font-size: 2rem;
+    color: azure;
+    font-weight: 900;
+    filter: brightness(1);
+}
+#buttoneditselecionjasfjagjd {
+    text-align: right;
+    padding-right: 30px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+#buttoneditselecionjasfjagjd-tr {
+    filter: brightness(1);
+}
+.info-edit-infoz {
+    background-color: rgb(0, 154, 3);
+    width: 5vw;
+    color: white;
+    transition: background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    filter: brightness(1);
+    font-size: 1rem;
+    border-radius: 0px;
+}
+.info-edit-infoz:hover {
+    background-color: rgb(47, 255, 57);
+    border-radius: 10px;
+}
+.info-delete-infoz{
+    background-color: rgb(154, 0, 0);
+    color: white;
+    width: 5vw;
+    margin-left: 1vw;
+    transition: background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    filter: brightness(1);
+    font-size: 1rem;
+    border-radius: 0px;
+}
+.info-delete-infoz:hover {
+    background-color: rgb(255, 47, 47);
+    border-radius: 10px;
+}
+.infoAdjuster {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente los elementos hijos */
+    align-items: center; /* Centra verticalmente los elementos hijos */
+    height: 100%; /* Ajusta la altura según sea necesario */
+    width: 100%;
+}

@@ -16,6 +16,7 @@ export const Module = ({name, configName, baseUrl, isDefaultEnabled, imageName})
     const [isEnabled, setIsEnabled] = useState(isDefaultEnabled)
     const user = useSelector((state) => state.AppGlobals.User)
     const configs = useSelector((state) => state.AppGlobals.Modules.Actived)
+    const [logger] = useMutation(Queries.addLog)
 
     const handleOnPress = () => {
         if (isEnabled == true) {
@@ -25,10 +26,24 @@ export const Module = ({name, configName, baseUrl, isDefaultEnabled, imageName})
                 variables: {
                     modules : configs,
                 }
-            }) 
+            })
+            logger({
+                variables: {
+                    userName: user.name,
+                    userId: user.ID,
+                    message: "The user with email " + user.email + " has removed the module of " + configName + " successfully!" 
+                }
+            })
         } else {
             dispatch(setNewModul(configName))
             setIsEnabled(true)
+            logger({
+                variables: {
+                    userName: user.name,
+                    userId: user.ID,
+                    message: "The user with email " + user.email + " has added the module of " + configName + " successfully!" 
+                }
+            })
         }
     }
 
