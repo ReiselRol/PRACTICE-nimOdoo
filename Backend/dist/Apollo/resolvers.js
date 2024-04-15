@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import { userModel, clientModel, enterpriseModel, productModel, salesProposalModel, logModel } from './recipes.js';
-import { DEVELOPMENT_URI } from './config/ApolloConfig.js';
-mongoose.connect(DEVELOPMENT_URI, { dbName: 'nimodoo' });
+import { userModel, clientModel, enterpriseModel, productModel, salesProposalModel, logModel, nimOdooModule } from './recipes.js';
+import { PRODUCTION_URI } from './config/ApolloConfig.js';
+mongoose.connect(PRODUCTION_URI, { dbName: 'nimodoo' });
 const generateRandomString = (length) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -26,6 +26,9 @@ const resolvers = {
     Query: {
         getUsers: async () => {
             return userModel.find();
+        },
+        getConfig: async () => {
+            return nimOdooModule.find();
         },
         getUserByID: async (parent, { userID }) => {
             return userModel.findById(userID);
@@ -80,6 +83,27 @@ const resolvers = {
             const newLog = new logModel(args);
             const savedLog = await newLog.save();
             return savedLog;
+        },
+        addConfig: async (parent, args) => {
+            const newConfig = new nimOdooModule(args);
+            const savedConfig = await newConfig.save();
+            return savedConfig;
+        },
+        updateNimodooConfigOrCreate: async (parent, args) => {
+            try {
+                const { modules } = args;
+                let nimodooConfig = await nimOdooModule.findOne();
+                if (!nimodooConfig)
+                    nimodooConfig = new nimOdooModule({ modules });
+                else
+                    nimodooConfig.modules = modules;
+                await nimodooConfig.save();
+                return nimodooConfig;
+            }
+            catch (error) {
+                console.error("Error al actualizar/crear la configuración de Nimodoo:", error);
+                throw new Error("Error al actualizar/crear la configuración de Nimodoo");
+            }
         },
         fakeUser: async (parent, args) => {
             var total = args.total;

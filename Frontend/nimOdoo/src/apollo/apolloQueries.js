@@ -13,6 +13,14 @@ export const getAllUsers = gql`
   }
 `;
 
+export const getConfig = gql`
+query Query {
+  getConfig {
+    modules
+  }
+}
+`
+
 export const getUserByID = gql`
   query GetUserByID($userID: ID!) {
     getUserByID(userID: $userID) {
@@ -188,6 +196,14 @@ mutation Mutation($name: String!, $surname: String!, $email: String!, $password:
     email
   }
 }`;
+
+export const updateConfig = gql`
+mutation Mutation($modules: [String]!) {
+  updateNimodooConfigOrCreate(modules: $modules) {
+    modules
+  }
+}
+`
 
 export const fakeUser = gql`
 mutation Mutation($total: Int!) {

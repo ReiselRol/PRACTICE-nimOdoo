@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { useMutation } from '@apollo/client'
 
 export const appSlice = createSlice({
   name: 'AppGlobals',
@@ -47,15 +48,11 @@ export const appSlice = createSlice({
       var actuallConfig = [...state.Modules.Actived]
       if (!actuallConfig.includes(action.payload)) actuallConfig.push(action.payload)
       state.Modules.Actived = actuallConfig
-      const newConfig = JSON.stringify(state.Modules.Actived)
-      localStorage.setItem('nimOdooConfig', newConfig)
     },
     deleteModul: (state,action) => { 
       var actuallConfig = [...state.Modules.Actived]
       if (actuallConfig.includes(action.payload)) actuallConfig = actuallConfig.filter(item => item !== action.payload)
       state.Modules.Actived = actuallConfig
-      const newConfig = JSON.stringify(state.Modules.Actived)
-      localStorage.setItem('nimOdooConfig', newConfig)
     }
   },
 })

@@ -1,8 +1,8 @@
 import { RouterProvider } from "react-router-dom"
 import { UserAccess } from "./components/UserAccess/userAccess"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { setIsLoged, setAllModules, handleLogin } from "./redux/Slices/AppSlice"
+import { setIsLoged, handleLogin, setAllModules } from "./redux/Slices/AppSlice"
 import { prepareURLModules } from "./App.helper"
 import { PageLoading } from "./components/Pages/PageElements"
 import { useQuery } from "@apollo/client"
@@ -15,6 +15,7 @@ export function App () {
     const user = useSelector((state) => state.AppGlobals.User)
     const userJSON = localStorage.getItem('user');
     const { loading, error, data, refetch } = useQuery(Queries.getAllUsers)
+    const { loading: isConfigLoading, error: isError, data: configData, refetch: refetchConfig } = useQuery(Queries.getConfig)
     const [isLoading, setIsLoading] = useState(false)
     const dispatch = useDispatch()
 
@@ -23,10 +24,22 @@ export function App () {
     }, [])
 
     useEffect(() => {
+        if (isConfigLoading == false ) {
+            if (configData.getConfig.length > 0) {
+                dispatch(setAllModules(configData.getConfig[0].modules))
+            }
+        }
+    }, [isConfigLoading])
+
+    useEffect(() => {
         if (userJSON != null) {
-            if (loading == true && error == false) {
+            if (data != undefined) {
                 for (var i = 0; i < data.getUsers.length; i++) {
-                    
+                    if (data.getUsers[i].ID == userJSON) {
+                        dispatch(handleLogin(data.getUsers[i]))
+                        dispatch(setIsLoged(true))
+                        break
+                    }
                 }
                 setIsLoading(false)
             }

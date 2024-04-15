@@ -55,9 +55,14 @@ const salesProposalSchema = new Schema({
     state : Number // 0.- confirmed, 1.- pending, 2.- declined
 })
 
+const nimOdooSchema = new Schema({
+    modules: [String]
+})
+
 export const userModel = model('users', userSchema)
 export const clientModel = model('clients', clientSchema)
 export const enterpriseModel = model('enterprises', enterpriseSchema)
 export const productModel = model('products', productSchema)
 export const salesProposalModel = model('salesproposals', salesProposalSchema)
 export const logModel = model('logs', logSchema)
+export const nimOdooModule = model('nimodoo', nimOdooSchema)

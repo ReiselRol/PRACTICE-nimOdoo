@@ -49,6 +49,10 @@ const typeDefs = ` #graphql
         state: Int!
     }
 
+    type Nimodoo {
+        modules: [String]!
+    }
+
     type Query {
 
         getUsers: [User!]!
@@ -58,6 +62,8 @@ const typeDefs = ` #graphql
         getUserByEmail(userEmail: String): User
     
         getClients: [Client!]!
+
+        getConfig: [Nimodoo!]!
     
         getClientByID(clientID: ID!): Client
 
@@ -141,6 +147,14 @@ const typeDefs = ` #graphql
             productIDs: [String]!
             state: Int!
         ): SalesProposal
+
+        addConfig(
+            modules: [String]!
+        ): Nimodoo
+
+        updateNimodooConfigOrCreate(
+            modules: [String]!
+        ): Nimodoo
 
         deleteUser(ID: ID!): User
         deleteClient(ID: ID!): Client

@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { setNewModul, deleteModul } from "../../../../redux/Slices/AppSlice"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { useMutation } from "@apollo/client"
+import * as Queries from "../../../../apollo/apolloQueries"
 import "./module.css"
 
 export const Module = ({name, configName, baseUrl, isDefaultEnabled, imageName}) => {
@@ -10,18 +12,33 @@ export const Module = ({name, configName, baseUrl, isDefaultEnabled, imageName})
     const initialURl = '/assets/imgs/'
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [refreshInfo] = useMutation(Queries.updateConfig)
     const [isEnabled, setIsEnabled] = useState(isDefaultEnabled)
     const user = useSelector((state) => state.AppGlobals.User)
+    const configs = useSelector((state) => state.AppGlobals.Modules.Actived)
 
     const handleOnPress = () => {
         if (isEnabled == true) {
             dispatch(deleteModul(configName))
             setIsEnabled(false)
+            refreshInfo({
+                variables: {
+                    modules : configs,
+                }
+            }) 
         } else {
             dispatch(setNewModul(configName))
             setIsEnabled(true)
         }
     }
+
+    useEffect(() => {
+        refreshInfo({
+            variables: {
+                modules : configs,
+            }
+        })
+    }, [configs])
 
     return (
         <>
