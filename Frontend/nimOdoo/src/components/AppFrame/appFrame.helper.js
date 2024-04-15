@@ -60,6 +60,7 @@ export const getQuickAccess = (admin) => {
             submenu : [
                 {name: "See all users", path: "/user"},
                 {name: "Create a user", path: "/user/create"},
+                {name: "See all logs", path: "/logs"},
             ]
         })
     }

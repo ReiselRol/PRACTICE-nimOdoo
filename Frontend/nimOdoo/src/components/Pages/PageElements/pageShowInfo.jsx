@@ -2,10 +2,13 @@ import { useMutation } from '@apollo/client'
 import { PageLoading } from '../PageElements'
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import * as Queries from '../../../apollo/apolloQueries'
 import './pageShowInfo.css'
 
 export default function PageShowInfo ({
     title,
+    Name,
     infoOrder,
     info, 
     loading,
@@ -14,6 +17,7 @@ export default function PageShowInfo ({
     queryForDelete,
     refecth,
     fakerQuery = undefined,
+    hasActions = true
 }) {
     const [loading2, setLoading2] = useState(true)
     const [infoV2, setInfoToShow] = useState([])
@@ -21,20 +25,32 @@ export default function PageShowInfo ({
     const [searchBy, setSearchBy] = useState(infoOrder[0][0])
     const navigate = useNavigate()
     const [deleter] = useMutation(queryForDelete)
+    const [logger] = useMutation(Queries.addLog)
     var fakeable = false
+    const user = useSelector((state) => state.AppGlobals.User)
+
+
     var fakeInfo = () => {}
     if (fakerQuery !== undefined) {
         const [faker] = useMutation(fakerQuery)
         fakeable = true
         var fakeInfo = () => {
+            const totalFakes = 5
             setLoading2(true)
             faker({
                 variables: {
-                    total : 5
+                    total : totalFakes,
                 }
             }).finally(() => {
                 refecth()
                 setLoading2(false)
+                logger({
+                    variables: {
+                        userName: user.name,
+                        userId: user.ID,
+                        message: "The user has added " + totalFakes + " fake " + Name + "s info successfully!" 
+                    }
+                })
             })
         }
     }
@@ -48,6 +64,13 @@ export default function PageShowInfo ({
         }).finally(() => {
             refecth()
             setLoading2(false)
+            logger({
+                variables: {
+                    userName: user.name,
+                    userId: user.ID,
+                    message: "The user has deleted a " + Name + " with id " + elementID + " successfully!" 
+                }
+            })
         })
     }
 
@@ -61,7 +84,8 @@ export default function PageShowInfo ({
             else if (info == 0) infoToShow = "Pending"
             else infoToShow = "Declined"
         }
-        if (infoToShow.length > 30) infoToShow = infoToShow.substring(0, 30) + '...';
+        const maxChars = (hasActions == false) ? 50 : 30
+        if (infoToShow.length > maxChars) infoToShow = infoToShow.substring(0, maxChars) + '...';
         return infoToShow
     }
 
@@ -109,9 +133,12 @@ export default function PageShowInfo ({
                     <td colSpan={3}>Options</td>
                 </tr>
                 <tr className='info-options-button-selection'>
-                    <td><button disabled={!fakeable} className='madafakin-btn-v2 info-show-info' onClick={() => { refecth() }}>Refresh</button></td>
-                    <td><button className='madafakin-btn-v2 info-edit-info' onClick={() => { navigate(linkToCreate + 'create')}}>Create +</button></td>
-                    <td><button className='madafakin-btn-v2 info-other-info' onClick={fakeInfo}>Fake Info +</button></td>
+                    <td><button className='madafakin-btn-v2 info-show-info' onClick={() => { refecth() }}>Refresh</button></td>
+                    <td>{(hasActions == true) ?<button className='madafakin-btn-v2 info-edit-info' onClick={() => { navigate(linkToCreate + 'create')}}>Create +</button> : <></>}</td>
+                    <td>{
+                        (user.admin == true && fakerQuery !== undefined) ? <button className='madafakin-btn-v2 info-other-info' onClick={fakeInfo}>Fake Info +</button> : <></>
+                        }
+                    </td>
                 </tr>
                 <tr className='info-options-selector'>
                     <td id='unbrighter'>Style: </td>
@@ -143,32 +170,39 @@ export default function PageShowInfo ({
             <table className='info-table'>
                 <tbody>
                     <tr className='info-title'>
-                        <td colSpan={infoOrder.length + 1}>{title}</td>
+                        <td colSpan={infoOrder.length + ((hasActions == true) ? 1 : 0)}>{title}</td>
                     </tr>
                     <tr className='info-info'>
                         {
                             infoOrder.map((eachPart, index) => (
-                                <td style={{wordWrap: 'break-word', overflow: 'hidden', maxWidth: (100 / (infoOrder.length + 1)) + '%'}} key={index + " - header"}>{eachPart[1]}</td>
+                                <td style={{wordWrap: 'break-word', overflow: 'hidden', maxWidth: (100 / (infoOrder.length + ((hasActions == true) ? 1 : 0))) + '%'}} key={index + " - header"}>{eachPart[1]}</td>
                             ))
                         }
-                        <td className='info-action'>Actions</td>
+                        { (hasActions == true) ?<td className='info-action'>Actions</td> : <></>}
                     </tr>
                     {
                         (infoV2.length > 0) ? infoV2.map((eachInfo, firtsIndex) => (
                             <tr className={'info-info-real-info ' + ((firtsIndex % 2 == 0) ? "info-info-real-info-par-info" : "")} key={firtsIndex + " - info - "}>
                                 {
                                     infoOrder.map((eachPart, index) => (
-                                        <td style={{wordWrap: 'break-word', overflow: 'hidden', maxWidth: (100 / (infoOrder.length + 1)) + '%'}} onClick={() => { navigate(linkToCreate + eachInfo["ID"] + "/show")}} key={firtsIndex + " - " + index}>{showInfo(eachInfo[eachPart[0]], eachPart[2])}</td>
+                                        (hasActions == true) ? <td style={{wordWrap: 'break-word', overflow: 'hidden', maxWidth: (100 / (infoOrder.length + ((hasActions == true) ? 1 : 0))) + '%'}} onClick={() => { navigate(linkToCreate + eachInfo["ID"] + "/show")}} key={firtsIndex + " - " + index}>{showInfo(eachInfo[eachPart[0]], eachPart[2])}</td> : 
+                                        <td style={{wordWrap: 'break-word', overflow: 'hidden', maxWidth: (100 / (infoOrder.length + ((hasActions == true) ? 1 : 0))) + '%'}} key={firtsIndex + " - " + index}>{showInfo(eachInfo[eachPart[0]], eachPart[2])}</td>
                                     ))
                                 }
-                                <td className='info-action'>
-                                    <button className='madafakin-btn info-show-info' onClick={() => { navigate(linkToCreate + eachInfo["ID"] + "/show")}}>Show</button>
-                                    <button className='madafakin-btn info-edit-info' onClick={() => { navigate(linkToCreate + eachInfo["ID"] + "/edit")}}>Edit</button>
-                                    <button className='madafakin-btn info-delete-info' onClick={() => deleteElement(eachInfo["ID"])}>Delete</button>
-                                </td>
+                                {(hasActions == true) ? 
+                                    <td className='info-action'>
+                                    <button key={firtsIndex + " -  show"} className='madafakin-btn info-show-info' onClick={() => { navigate(linkToCreate + eachInfo["ID"] + "/show")}}>Show</button>
+                                    {
+                                        (user.admin == true) ? <>
+                                            <button key={firtsIndex + " -  edit"} className='madafakin-btn info-edit-info' onClick={() => { navigate(linkToCreate + eachInfo["ID"] + "/edit")}}>Edit</button>
+                                            <button key={firtsIndex + " -  delete"}className='madafakin-btn info-delete-info' onClick={() => deleteElement(eachInfo["ID"])}>Delete</button>
+                                            </> : <></>
+                                    }
+                                </td> : <></>
+                                }
                             </tr>
                         )) : <tr>
-                            <td className='info-nothingFound' colSpan={infoOrder.length + 1}>
+                            <td className='info-nothingFound' colSpan={infoOrder.length + ((hasActions == true) ? 1 : 0)}>
                                 Nothing Found Here <br/> :[
                             </td>
                         </tr>

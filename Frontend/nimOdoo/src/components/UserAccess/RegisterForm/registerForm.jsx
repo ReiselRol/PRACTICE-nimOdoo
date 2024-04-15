@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import '../userAccess.css'
 import * as Queries from '../../../apollo/apolloQueries'
+import { PageLoading } from "../../Pages/PageElements";
 
 export function RegisterForm ({setIsOnLogin, setIsLogged, setUser}) {
     const [name, setname] = useState("")
@@ -11,6 +12,7 @@ export function RegisterForm ({setIsOnLogin, setIsLogged, setUser}) {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [addUser] = useMutation(Queries.addUser);
     const [registredSuccessfully, setRegistredSuccessfully] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const onChangeEmail = (e) => { setEmail(e.target.value.toLowerCase()) }
     const onChangePassword = (e) => { setPassword(e.target.value) }
@@ -25,6 +27,7 @@ export function RegisterForm ({setIsOnLogin, setIsLogged, setUser}) {
     }, [registredSuccessfully])
 
     const tryRegister = () => {
+        setLoading(true)
         if (email != "" && password != "" && name != "" && surname != "" && password == confirmPassword) {
             addUser({
                 variables: {
@@ -34,15 +37,15 @@ export function RegisterForm ({setIsOnLogin, setIsLogged, setUser}) {
                     name: name,
                     surname: surname
                 }
-            }).then(response => {
+            }).finally(response => {
+                setLoading(false)
                 setRegistredSuccessfully(true)
-                
             })
-        }
+        } else setLoading(false)
     } 
 
     return (
-        <div>
+        (loading == false) ? <div>
             <table className="userFormTable">
                 <tbody>
                     <tr>
@@ -71,6 +74,6 @@ export function RegisterForm ({setIsOnLogin, setIsLogged, setUser}) {
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> : <PageLoading/>
     )
 }

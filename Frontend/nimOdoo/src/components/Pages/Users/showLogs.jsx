@@ -1,29 +1,28 @@
 import { Page } from "../page"
-import { USER_INFO_CONFIG } from "./constants"
+import { LOG_INFO_CONFIG } from "./constants"
 import { PageShowInfo, PageLoading } from "../PageElements"
 import { useQuery } from "@apollo/client";
 import * as Queries from "../../../apollo/apolloQueries"
 import { useEffect } from "react";
 
-export default function AllUsers ({}) {
+export default function ShowLogs ({}) {
 
-    const { loading, error, data, refetch } = useQuery(Queries.getAllUsers)
+    const { loading, error, data, refetch } = useQuery(Queries.getAllLogs)
 
     useEffect(() => { refetch() }, [])
     return (
         data != undefined ? (
-        <Page Name={"All Users"}>
+        <Page Name={"All Logs"}>
             <PageShowInfo
-                title="All Users"
-                Name={"user"}
-                infoOrder={USER_INFO_CONFIG}
+                title="All Logs"
+                infoOrder={LOG_INFO_CONFIG}
                 loading={loading}
                 error={error}
-                info={data.getUsers}
+                info={data.getLogs}
                 queryForDelete={Queries.deleteUser}
                 refecth={refetch}
                 linkToCreate="/user/"
-                fakerQuery={Queries.fakeUser}
+                hasActions={false}
                 />
         </Page>) : <PageLoading/>
     )

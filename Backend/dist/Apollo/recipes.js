@@ -20,6 +20,11 @@ const clientSchema = new Schema({
     phone: String,
     enterpriseID: Number // ID Empresa si es de una y si no -1
 });
+const logSchema = new Schema({
+    UserName: String,
+    UserID: String,
+    Message: String,
+});
 const enterpriseSchema = new Schema({
     ID: String,
     name: String,
@@ -48,3 +53,4 @@ export const clientModel = model('clients', clientSchema);
 export const enterpriseModel = model('enterprises', enterpriseSchema);
 export const productModel = model('products', productSchema);
 export const salesProposalModel = model('salesproposals', salesProposalSchema);
+export const logModel = model('logs', logSchema);

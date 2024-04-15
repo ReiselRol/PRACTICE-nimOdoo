@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { userModel, clientModel, enterpriseModel, productModel, salesProposalModel } from './recipes.js';
+import { userModel, clientModel, enterpriseModel, productModel, salesProposalModel, logModel } from './recipes.js';
 import { DEVELOPMENT_URI } from './config/ApolloConfig.js';
 mongoose.connect(DEVELOPMENT_URI, { dbName: 'nimodoo' });
 const generateRandomString = (length) => {
@@ -35,6 +35,9 @@ const resolvers = {
         },
         getClients: async () => {
             return clientModel.find();
+        },
+        getLogs: async () => {
+            return logModel.find();
         },
         getClientByID: async (parent, { clientID }) => {
             return clientModel.findById(clientID);
@@ -72,6 +75,11 @@ const resolvers = {
             savedUser.ID = savedUser._id.toString();
             await userModel.findByIdAndUpdate(savedUser._id, { ID: savedUser._id }, { new: true });
             return savedUser;
+        },
+        addLog: async (parent, args) => {
+            const newLog = new logModel(args);
+            const savedLog = await newLog.save();
+            return savedLog;
         },
         fakeUser: async (parent, args) => {
             var total = args.total;

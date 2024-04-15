@@ -14,6 +14,7 @@ export default function AllClients ({}) {
             <Page Name={"All Clients"}>
                 <PageShowInfo
                     title="All Clients"
+                    Name={"client"}
                     infoOrder={CLIENT_INFO_CONFIG}
                     loading={loading}
                     error={error}

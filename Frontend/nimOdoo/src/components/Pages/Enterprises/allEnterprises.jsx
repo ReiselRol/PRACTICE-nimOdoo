@@ -14,6 +14,7 @@ export default function AllEnterprises ({}) {
             <Page Name={"All Enterprises"}>
                 <PageShowInfo
                     title="All Enterprises"
+                    Name={"enterprise"}	
                     infoOrder={ENTERPRISE_INFO_CONFIG}
                     loading={loading}
                     error={error}

@@ -13,6 +13,7 @@ export default function AllSales ({}) {
             <Page Name={"All Sales"}>
                 <PageShowInfo
                     title="All Sales"
+                    Name={"sale"}
                     infoOrder={SALES_INFO_CONFIG}
                     loading={loading}
                     error={error}

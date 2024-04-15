@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import * as Queries from "../../../apollo/apolloQueries";
 import { useDispatch } from "react-redux"
 import { setIsLoged, handleLogin } from "../../../redux/Slices/AppSlice";
+import { PageLoading } from "../../Pages/PageElements";
 import '../userAccess.css'
 
 export function LoginForm({setIsOnLogin}) {
@@ -37,8 +38,7 @@ export function LoginForm({setIsOnLogin}) {
                             surname : data.getUsers[i].surname
                         }
                         dispatch(handleLogin(user))
-                        const userJSON = JSON.stringify(user);
-                        localStorage.setItem('user', userJSON);
+                        localStorage.setItem('user', user.ID);
                     }
                     break
                 }
@@ -47,23 +47,23 @@ export function LoginForm({setIsOnLogin}) {
     }
 
     return (
-        <div>
-            <table className="userFormTable">
-                <tbody>
-                    <tr>
-                        <td><label>Email</label></td>
-                        <td><input type="text" name="email" value={email} onChange={onChangeEmail}/></td>
-                    </tr>
-                    <tr>
-                        <td><label>Password</label></td>
-                        <td><input type="password" name="password" value={password} onChange={onChangePassword}/></td>
-                    </tr>
-                    <tr>
-                        <td><button onClick={tryLogIn}>Log In</button></td>
-                        <td id="linkTd"><a onClick={() => setIsOnLogin(false)}>I dont have account</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+          (loading == false) ? <div>
+                <table className="userFormTable">
+                    <tbody>
+                        <tr>
+                            <td><label>Email</label></td>
+                            <td><input type="text" name="email" value={email} onChange={onChangeEmail}/></td>
+                        </tr>
+                        <tr>
+                            <td><label>Password</label></td>
+                            <td><input type="password" name="password" value={password} onChange={onChangePassword}/></td>
+                        </tr>
+                        <tr>
+                            <td><button onClick={tryLogIn}>Log In</button></td>
+                            <td id="linkTd"><a onClick={() => setIsOnLogin(false)}>I dont have account</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> : <PageLoading/>
     )
 }

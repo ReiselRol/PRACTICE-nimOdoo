@@ -9,7 +9,7 @@ import { AppFrame } from "./components/AppFrame/appFrame"
 import { NotFoundPage } from "./components/Pages/NotFoundPage/notFoundPage"
 import { Modules } from "./components/Pages/Modules/modules"
 import { Configurations } from "./components/Pages/Configurations"
-import { AllUsers, CreateUser, EditUser, ShowUser } from "./components/Pages/Users"
+import { AllUsers, CreateUser, EditUser, ShowUser, ShowLogs } from "./components/Pages/Users"
 
 export const prepareURLModules = (modulesConfig, admin) => {
     var allURL = [
@@ -154,6 +154,11 @@ export const prepareURLModules = (modulesConfig, admin) => {
             allURL.push({
                 path: '/user/:id/show/',
                 element: <AppFrame><ShowUser/></AppFrame>,
+                errorElement: <NotFoundPage/>
+            })
+            allURL.push({
+                path: '/logs',
+                element: <AppFrame><ShowLogs/></AppFrame>,
                 errorElement: <NotFoundPage/>
             })
         }

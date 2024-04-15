@@ -8,6 +8,12 @@ const typeDefs = ` #graphql
         email: String!
     }
 
+    type Log {
+        UserName: String!
+        UserID: String!
+        Message: String!
+    }
+
     type Client {
         ID: String!
         name: String!
@@ -54,6 +60,8 @@ const typeDefs = ` #graphql
         getClients: [Client!]!
     
         getClientByID(clientID: ID!): Client
+
+        getLogs: [Log!]!
     
         getEnterprises: [Enterprise!]!
 
@@ -81,6 +89,12 @@ const typeDefs = ` #graphql
             password: String!
             admin: Boolean!
         ): User
+
+        addLog(
+            UserName: String!
+            UserID: String!
+            Message: String!
+        ) : Log
 
         fakeUser(    
             total: Int!

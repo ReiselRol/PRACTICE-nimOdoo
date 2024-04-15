@@ -13,6 +13,7 @@ export default function AllProducts ({}) {
             <Page Name={"All Products"}>
                 <PageShowInfo
                     title="All Products"
+                    Name={"product"}
                     infoOrder={PRODUCT_INFO_CONFIG}
                     loading={loading}
                     error={error}
@@ -20,6 +21,7 @@ export default function AllProducts ({}) {
                     queryForDelete={Queries.deleteProduct}
                     refecth={refetch}
                     linkToCreate="/product/"
+                    fakerQuery={Queries.fakeProduct}
                     />
             </Page>
         ) : <PageLoading/>

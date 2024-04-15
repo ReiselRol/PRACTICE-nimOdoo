@@ -102,6 +102,15 @@ export const getAllProducts = gql`
     }
   }
 `;
+export const getAllLogs = gql`
+  query GetLogs {
+    getLogs {
+      UserName
+      UserID
+      Message
+    }
+  }
+`;
 
 export const getProductByID = gql`
   query GetProductByID($productID: ID!) {
@@ -203,6 +212,16 @@ mutation Mutation($name: String!, $email: String!, $phone: String!, $surname: St
     enterpriseID
   }
 }`;
+
+export const addLog = gql`
+  mutation Mutation($userName: String!, $userId: String!, $message: String!) {
+    addLog(UserName: $userName, UserID: $userId, Message: $message) {
+      UserName
+      UserID
+      Message
+    }
+  }
+`
 
 export const fakeClient = gql`
 mutation Mutation($total: Int!) {
