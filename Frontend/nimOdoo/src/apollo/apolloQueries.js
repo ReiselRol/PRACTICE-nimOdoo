@@ -367,3 +367,74 @@ mutation Mutation($id: ID!) {
     state
   }
 }`;
+
+export const updateUser = gql`
+mutation Mutation($userId: ID!, $name: String, $surname: String, $email: String, $password: String, $admin: Boolean) {
+  updateUserByID(userID: $userId, name: $name, surname: $surname, email: $email, password: $password, admin: $admin) {
+    ID
+    name
+    surname
+    password
+    admin
+    email
+  }
+}`;
+
+export const updateClient = gql`
+mutation Mutation($clientId: ID!, $name: String, $surname: String, $email: String, $phone: String, $enterpriseId: String) {
+  updateClientByID(clientID: $clientId, name: $name, surname: $surname, email: $email, phone: $phone, enterpriseID: $enterpriseId) {
+    ID
+    name
+    surname
+    email
+    phone
+    enterpriseID
+  }
+}`;
+
+export const updateProduct = gql`
+mutation Mutation($productId: ID!, $price: Float, $stock: Int, $description: String, $name: String) {
+  updateProductByID(productID: $productId, price: $price, stock: $stock, description: $description, name: $name) {
+    ID
+    name
+    description
+    stock
+    price
+  }
+}`;
+
+export const updateEnterprise = gql`
+mutation Mutation($enterpriseId: ID!, $name: String, $address: String, $phone: String, $email: String, $cif: String) {
+  updateEnterpriseByID(enterpriseID: $enterpriseId, name: $name, address: $address, phone: $phone, email: $email, cif: $cif) {
+    ID
+    name
+    phone
+    address
+    email
+    cif
+  }
+}`;
+
+export const updateSaleProposal = gql`
+mutation Mutation($salesProposalId: ID!, $proposerId: String, $clientId: String, $productIDs: [String], $state: Int) {
+  updateSalesProposalByID(salesProposalID: $salesProposalId, proposerID: $proposerId, clientID: $clientId, productIDs: $productIDs, state: $state) {
+    ID
+    proposerID
+    productIDs
+    clientID
+    creationDate
+    state
+  }
+}`;
+
+export const updateSell = gql`
+mutation Mutation($salesProposalId: ID!, $state: Int, $productIDs: [String], $clientId: String, $proposerId: String) {
+  updateSellByID(salesProposalID: $salesProposalId, state: $state, productIDs: $productIDs, clientID: $clientId, proposerID: $proposerId) {
+    ID
+    proposerID
+    productIDs
+    clientID
+    creationDate
+    state
+  }
+}`;
