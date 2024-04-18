@@ -1,14 +1,39 @@
 import { Page } from "../page"
 import { useParams } from "react-router-dom";
-import { PageLoading } from "../PageElements";
+import { PageLoading, PageShowElement } from "../PageElements";
+import { useQuery } from "@apollo/client";
+import * as Queries from "../../../apollo/apolloQueries"
+import { SHOW_CLIENT_INFO_CONFIG } from "./constants";
 
 export default function EditClient ({}) {
 
     const { id } = useParams();
-    console.log(id);
+    const { loading, error, data, refetch} = useQuery(Queries.getClientByID, {
+        variables:{
+            clientID : id
+        }
+    });
+    const edit = () => {
+
+    }
+    if (loading) return <PageLoading/>
     return (
         <Page Name={"Edit a Client"}>
-            <PageLoading/>
+            {
+                (data != undefined) && <PageShowElement
+                    options={SHOW_CLIENT_INFO_CONFIG}
+                    info={data.getClientByID}
+                    elementType={"Product: " +  data.getClientByID.name}
+                    editLink={"/client/" + id + "/show"}
+                    edit={true}
+                    editCallback={edit}
+                >
+                    <tr>
+                        <td>Enterprise</td>
+                    {(data.getClientByID.enterpriseID == null) ? <td>This client dont have an enterprise...</td> : <></>}
+                    </tr>
+                </PageShowElement>
+            }
         </Page>
     )
 }

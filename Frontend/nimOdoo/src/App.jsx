@@ -21,6 +21,8 @@ export function App () {
     const [isLoading, setIsLoading] = useState(false)
     const dispatch = useDispatch()
 
+    console.log(configData)
+    
     useEffect(() => {
         if (userJSON != null) setIsLoading(true)
     }, [])
