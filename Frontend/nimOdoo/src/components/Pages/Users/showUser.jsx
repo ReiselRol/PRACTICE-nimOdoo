@@ -4,6 +4,7 @@ import { PageLoading , PageShowElement} from "../PageElements";
 import { useQuery } from "@apollo/client";
 import * as Queries from "../../../apollo/apolloQueries"
 import { SHOW_USER_INFO_CONFIG } from "./constants";
+import { useEffect } from "react";
 
 export default function ShowUser ({}) {
 
@@ -13,6 +14,7 @@ export default function ShowUser ({}) {
             userID : id
         }
     });
+    useEffect(() => {refetch()}, [])
     if (loading) return <PageLoading/>
     return (
         <Page Name={"Show user: " + data.getUserByID.name}>

@@ -53,7 +53,9 @@ export default function PageShowElement ({
                                                     {
                                                         (edit == false && create == false) ? 
                                                             showInfo(eachInfo[eachPart[0]], eachPart[2]) :
-                                                        ((eachPart[1] != "ID") ?<input type="text" onChange={(e) => {editStates[index].setState(e.target.value)}} value={editStates[index].value}/> : showInfo(eachInfo[eachPart[0]], eachPart[2]))
+                                                        ((eachPart[1] != "ID") ? 
+                                                            (eachPart[2] != "Boolean") ? <input type="text" onChange={(e) => {editStates[index].setState(e.target.value)}} value={editStates[index].value}/> : 
+                                                            <input type="checkbox" onChange={() => {editStates[index].setState(!editStates[index].value)}} checked={editStates[index].value}/>: showInfo(eachInfo[eachPart[0]], eachPart[2]))
                                                     }
                                                 </td>
                                             </tr>
