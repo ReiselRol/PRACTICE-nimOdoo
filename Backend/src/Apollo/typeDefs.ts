@@ -161,6 +161,57 @@ const typeDefs = ` #graphql
         deleteEnterprise(ID: ID!): Enterprise
         deleteProduct(ID: ID!): Product
         deleteSalesProposal(ID: ID!): SalesProposal
+
+        updateUserByID(
+            userID: ID!
+            name: String
+            surname: String
+            email: String
+            password: String
+            admin: Boolean
+        ): User
+    
+        updateClientByID(
+            clientID: ID!
+            name: String
+            surname: String
+            email: String
+            phone: String
+            enterpriseID: String
+        ): Client
+    
+        updateProductByID(
+            productID: ID!
+            name: String
+            description: String
+            stock: Int
+            price: Float
+        ): Product
+    
+        updateEnterpriseByID(
+            enterpriseID: ID!
+            name: String
+            phone: String
+            address: String
+            email: String
+            cif: String
+        ): Enterprise
+    
+        updateSalesProposalByID(
+            salesProposalID: ID!
+            proposerID: String
+            clientID: String
+            productIDs: [String]
+            state: Int
+        ): SalesProposal
+    
+        updateSellByID(
+            salesProposalID: ID!
+            proposerID: String
+            clientID: String
+            productIDs: [String]
+            state: Int
+        ): SalesProposal
     }
 `
 export default typeDefs

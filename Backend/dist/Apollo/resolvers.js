@@ -238,6 +238,30 @@ const resolvers = {
         deleteSalesProposal: async (parent, { ID }) => {
             return salesProposalModel.findById(ID).then(salesProposal => salesProposal.deleteOne());
         },
+        updateUserByID: async (parent, args) => {
+            const { userID, ...updateFields } = args;
+            return userModel.findByIdAndUpdate(userID, updateFields, { new: true });
+        },
+        updateClientByID: async (parent, args) => {
+            const { clientID, ...updateFields } = args;
+            return clientModel.findByIdAndUpdate(clientID, updateFields, { new: true });
+        },
+        updateProductByID: async (parent, args) => {
+            const { productID, ...updateFields } = args;
+            return productModel.findByIdAndUpdate(productID, updateFields, { new: true });
+        },
+        updateEnterpriseByID: async (parent, args) => {
+            const { enterpriseID, ...updateFields } = args;
+            return enterpriseModel.findByIdAndUpdate(enterpriseID, updateFields, { new: true });
+        },
+        updateSalesProposalByID: async (parent, args) => {
+            const { salesProposalID, ...updateFields } = args;
+            return salesProposalModel.findByIdAndUpdate(salesProposalID, updateFields, { new: true });
+        },
+        updateSellByID: async (parent, args) => {
+            const { salesProposalID, ...updateFields } = args;
+            return salesProposalModel.findByIdAndUpdate(salesProposalID, updateFields, { new: true });
+        },
     },
 };
 export default resolvers;
