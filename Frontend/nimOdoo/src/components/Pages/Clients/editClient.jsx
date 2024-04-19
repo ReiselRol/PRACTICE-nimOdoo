@@ -1,22 +1,58 @@
 import { Page } from "../page"
 import { useParams } from "react-router-dom";
 import { PageLoading, PageShowElement } from "../PageElements";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import * as Queries from "../../../apollo/apolloQueries"
 import { SHOW_CLIENT_INFO_CONFIG } from "./constants";
+import { useState, useEffect } from "react";
 
 export default function EditClient ({}) {
 
+    const [aontherLoading, setAnotherLoading] = useState(false)
+    const [editer] = useMutation(Queries.updateClient)
     const { id } = useParams();
     const { loading, error, data, refetch} = useQuery(Queries.getClientByID, {
         variables:{
             clientID : id
         }
     });
-    const edit = () => {
 
+    const [name, setName] = useState("")
+    const [surname, setSurname] = useState("")
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+
+    const editStates = [
+        { value : null, setState : null },
+        { value : name, setState : setName },
+        { value : surname, setState : setSurname },
+        { value : email, setState : setEmail },
+        { value : phone, setState : setPhone }
+    ]
+
+    const edit = () => {
+        setAnotherLoading(true)
+        editer ({
+            variables:{
+                clientId : id,
+                name : name,
+                surname : surname,
+                email : email,
+                phone : phone,
+            }
+        }).finally(setAnotherLoading(false))
+        return true
     }
-    if (loading) return <PageLoading/>
+
+    useEffect(() => {
+        if (loading == false) {
+            setName(data.getClientByID.name)
+            setSurname(data.getClientByID.surname)
+            setEmail(data.getClientByID.email)
+            setPhone(data.getClientByID.phone)
+        }
+    }, [loading])
+    if (loading || aontherLoading) return <PageLoading/>
     return (
         <Page Name={"Edit a Client"}>
             {
@@ -27,6 +63,7 @@ export default function EditClient ({}) {
                     editLink={"/client/" + id + "/show"}
                     edit={true}
                     editCallback={edit}
+                    editStates={editStates}
                 >
                     <tr>
                         <td>Enterprise</td>

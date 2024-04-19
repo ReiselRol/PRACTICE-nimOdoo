@@ -20,8 +20,6 @@ export function App () {
     const { loading: isConfigLoading, error: isError, data: configData, refetch: refetchConfig } = useQuery(Queries.getConfig)
     const [isLoading, setIsLoading] = useState(false)
     const dispatch = useDispatch()
-
-    console.log(configData)
     
     useEffect(() => {
         if (userJSON != null) setIsLoading(true)

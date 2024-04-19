@@ -100,7 +100,6 @@ export default function PageShowInfo ({
     const filterWithText = () => {
         if (searcher != '') {
             var newInfo = []
-            console.log(infoV2[i])
             for (var i = 0; i < infoV2.length; i++) {
                 if (infoV2[i][searchBy].toLowerCase().includes(searcher.toLowerCase())) newInfo.push(infoV2[i])
             }

@@ -42,11 +42,11 @@ export default function EditUser ({}) {
                 admin: admin
             }
         }).finally(() => {setAnotherLoading(false)})
+        return true
     }
 
     useEffect(() => { 
         if (loading == false) {
-                console.log(data.getUserByID.name)
                 setName(data.getUserByID.name)
                 setSurname(data.getUserByID.surname)
                 setEmail(data.getUserByID.email)

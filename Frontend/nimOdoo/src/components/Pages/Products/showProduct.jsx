@@ -4,6 +4,7 @@ import { PageLoading, PageShowElement } from "../PageElements";
 import { useQuery } from "@apollo/client";
 import * as Queries from "../../../apollo/apolloQueries"
 import { SHOW_PRODUCT_INFO } from "./constants";
+import { useEffect } from "react";
 
 export default function ShowProduct ({}) {
 
@@ -13,6 +14,8 @@ export default function ShowProduct ({}) {
             productID : id
         }
     });
+
+    useEffect(()=>{ refetch() },[])
 
     if (loading) return <PageLoading/>
     return (
