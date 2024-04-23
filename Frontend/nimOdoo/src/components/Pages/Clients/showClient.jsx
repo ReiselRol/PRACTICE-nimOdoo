@@ -24,6 +24,8 @@ export default function ShowClient ({}) {
                     info={data.getClientByID}
                     elementType={"Product: " +  data.getClientByID.name}
                     editLink={"/client/" + id + "/edit"}
+                    deleter={Queries.deleteClient}
+                    baseLink="/client/"
                 >
                     <tr>
                         <td>Enterprise</td>

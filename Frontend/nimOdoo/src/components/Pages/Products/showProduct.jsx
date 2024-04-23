@@ -26,6 +26,8 @@ export default function ShowProduct ({}) {
                     info={data.getProductByID}
                     elementType={"Product: " +  data.getProductByID.name}
                     editLink={"/product/" + id + "/edit"}
+                    deleter={Queries.deleteProduct}
+                    baseLink="/product/"
                 />
             }
         </Page>

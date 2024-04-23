@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
 import "./pageShowElement.css"
+import { useMutation } from '@apollo/client'
 
 export default function PageShowElement ({
     edit = false,
@@ -9,11 +9,14 @@ export default function PageShowElement ({
     options,
     info,
     elementType,
+    deleter,
     editLink,
     editStates,
     editCallback,
-    children
+    children,
+    baseLink
 }) {
+
     var infoOnArray = [info]
     if (create == true){
         edit = true
@@ -23,9 +26,26 @@ export default function PageShowElement ({
         infoOnArray.push(object)
         console.log(infoOnArray)
     }
+    var deleteItem = (id) => {console.log("Pass the query...")}
+    var itemDeleter = (id) => {
+        deleteItem({
+            variables: {
+                id: id
+            }
+        })
+    }
     const user = useSelector((state) => state.AppGlobals.User)
     const navigate = useNavigate()
-    
+    if (deleter != null || deleter != undefined) {
+        [deleteItem] = useMutation(deleter)
+        var itemDeleter = (id) => {
+            deleteItem({
+                variables: {
+                    id: infoOnArray[0].ID
+                }
+            }).finally(() => {console.log(baseLink); navigate(baseLink)})
+        }
+    }
     const showInfo = (info, howToTractIt) => {
         var infoToShow = info
         if (howToTractIt == "Password") infoToShow = "········"
@@ -40,7 +60,7 @@ export default function PageShowElement ({
         if (infoToShow.length > maxChars) infoToShow = infoToShow.substring(0, maxChars) + '...';
         return infoToShow
     }
-    return (
+        return (
         <div className='infoAdjuster'>
             <table className="userFormTablez">
                 <tbody>
@@ -79,7 +99,7 @@ export default function PageShowElement ({
                         (user.admin == true && edit == false && create == false) && <tr id='buttoneditselecionjasfjagjd-tr'>
                             <td colSpan={2} id='buttoneditselecionjasfjagjd'>
                                 <button className='info-edit-infoz' onClick={() => {navigate(editLink)}}>Edit</button>
-                                <button className='info-delete-infoz'>Delete</button>
+                                <button className='info-delete-infoz' onClick={() => itemDeleter(infoOnArray[0].ID)}>Delete</button>
                             </td>
                         </tr>
                     }

@@ -14,7 +14,7 @@ export default function ShowUser ({}) {
             userID : id
         }
     });
-    useEffect(() => {refetch()}, [])
+    useEffect(() => { refetch() }, [])
     if (loading) return <PageLoading/>
     return (
         <Page Name={"Show user: " + data.getUserByID.name}>
@@ -24,6 +24,8 @@ export default function ShowUser ({}) {
                     info={data.getUserByID}
                     elementType={"User: " +  data.getUserByID.name}
                     editLink={"/user/" + id + "/edit"}
+                    baseLink="/user/"
+                    deleter={Queries.deleteUser}
                 />
             }
         </Page>
