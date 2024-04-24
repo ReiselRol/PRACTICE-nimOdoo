@@ -4,13 +4,15 @@
     height: auto;
     margin-left: 5.75vw;
     padding: 3%;
-    overflow: hidden;
     border-radius: 50px;
+    overflow-y: hidden;
+    overflow-x: visible;
 }
 .info-table{
     width: 100%;
     max-width: 100%;
     height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.512) 0 0 10px;
 }
 .info-title{
     text-align: center;
@@ -53,7 +55,7 @@
     border-radius: 10px;
 }
 .info-options {
-    width: 30%;
+    width: 270px;
     font-size: 1.2rem;
     border: black solid 2px;
     margin-bottom: 20px;
@@ -96,7 +98,7 @@
     border-radius: 10px;
 }
 .madafakin-btn{
-    width: 4vw;
+    width: 80px;
 }
 .info-title-options{
     background: radial-gradient(#62b6ee, #237eba);
@@ -166,6 +168,10 @@
 .flexy-flexy-item {
     flex: 0 0 calc(33.333% - 50px); /* Ancho de cada elemento (1/3) con un pequeño espacio entre ellos */
     margin: 20px;
+    width: 33%;
+    @media (max-width: 400px) {
+        width: 80%;
+    }
     border: rgb(0, 0, 0) solid 2px;
     background: linear-gradient(34deg,#e6f8ff, #cbf0ff);
     word-wrap: break-word;

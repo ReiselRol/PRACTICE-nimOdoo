@@ -5,9 +5,13 @@
     position: fixed;
     top: 0;
     left: 0;
-background: linear-gradient(90deg,#00b3ff, #0077ff);    font-weight: 500;
-    
+    vertical-align: center;
+    background: linear-gradient(90deg,#00b3ff, #0077ff);
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     z-index: 2000;
+    color: white;
 }
 .nav-distributionTable {
     width: 100vw;
@@ -16,24 +20,34 @@ background: linear-gradient(90deg,#00b3ff, #0077ff);    font-weight: 500;
 .nav-distributionTableTr {
     width: 100vw;
     height: 100%;
-    vertical-align: middle;
+    vertical-align: center;
 }
 .nav-tdLogo {
-    width: 8vw;
-    padding-left: 2.5%;
+    padding-left:40px;
+    width: auto;
 }
 .nav-Hamburger {
-    width: 5vw;
-    vertical-align: center;
+    width: 100px;
+    padding: 10px;
     text-align: center;
     padding: 0%;
 }
 .nav-Hamburger-img {
-    width: 60%;
-    height: 60%;
+    width: 50px;
+    height: 50px;
 }
 .nav-tdTitleName {
-    width: 90vw;
-    padding-left: 3vw;
+    padding-left: 30px;
     color: white;
+}
+.nav-user{
+    width: 60px;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+}
+.madafaking-font {
+    margin-left: 20px;
+    position: absolute;
+    top :26%;
 }

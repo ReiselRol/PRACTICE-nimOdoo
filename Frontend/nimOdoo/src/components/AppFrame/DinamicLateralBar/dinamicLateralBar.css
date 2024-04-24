@@ -6,8 +6,9 @@
     margin: 0;
     padding: 0;
     z-index: 1002;
-    background: linear-gradient(180deg, #ffffff, #ffffff);
+    background: linear-gradient(180deg,#00b3ff, #0077ff);
     transition: width 0.5s ease-in-out;
+    filter: brightness(0.7);
 }
 .dlb-position {
     position: fixed;
@@ -22,17 +23,18 @@
     overflow-y: auto;
 }
 .dlb-containerUnactived {
-    width: 7vw;
+    width: 0px;
 }
 .dlb-containerActived {
-    width: 19vw;
+    width: 200px;
+    @media (max-width: 400px) {
+        width: 100vw;
+    }
 }
 .dlb-title {
     text-align: center;
     color: white;
     font-size: 1.6rem;
-    padding-right: 5%;
-    padding-left: 5%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

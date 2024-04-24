@@ -4,15 +4,16 @@
     font-size: 1.6rem;
     padding-right: 5%;
     padding-left: 5%;
+    font-weight: 800;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     background-color: rgb(101, 146, 229);   
-    border: rgba(0, 0, 0, 0.44) solid 2px;
     filter: brightness(1);
     transition: filter 0.2s ease-in-out, height 1s ease-in-out;
     user-select: none;
-    margin-top: 2vh;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 .folder-title:hover {
     filter: brightness(1.2);

@@ -21,6 +21,7 @@ export function Home ({}) {
                 </tr>
             </table>
             <div className="home-the-center"><button onClick={() => { navigate("/modules") }}>See All Modules</button></div>
+            <br/> <br/> <br/>
         </Page>
     )
 }
