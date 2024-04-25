@@ -39,7 +39,7 @@ export default function ShowClient ({}) {
                     <tr>
                         <td>Enterprise</td>
                     {(data.getClientByID.enterpriseID == null) ? <td>This client dont have an enterprise...</td>
-                    : (dataE != undefined) ? <td>{dataE.getEnterpriseByID.name}</td> : <></>}
+                    : (loadingE == false && dataE.getEnterpriseByID) ? <td>{dataE.getEnterpriseByID.name}</td> : <></>}
                     </tr>
                 </PageShowElement>
             }

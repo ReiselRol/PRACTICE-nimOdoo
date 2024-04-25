@@ -69,6 +69,7 @@ export default function EditClient ({}) {
             setOptions(newOptions)
         }
     }, [loading2])
+
     if (loading || aontherLoading) return <PageLoading/>
     return (
         <Page Name={"Edit a Client"}>
@@ -76,7 +77,7 @@ export default function EditClient ({}) {
                 (data != undefined) && <PageShowElement
                     options={SHOW_CLIENT_INFO_CONFIG}
                     info={data.getClientByID}
-                    elementType={"Product: " +  data.getClientByID.name}
+                    elementType={"Client: " +  data.getClientByID.name}
                     editLink={"/client/" + id + "/show"}
                     edit={true}
                     editCallback={edit}

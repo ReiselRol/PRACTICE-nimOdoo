@@ -65,8 +65,7 @@ export default function PageShowElement ({
                 userId: user.ID,
                 message: "The user has added a new " + uniqueName + " info successfully!"
             }
-        })
-        navigate(editLink)
+        }).finally(() => {navigate(editLink)})
     }
     const editItem = () => {
         logger({
@@ -75,8 +74,7 @@ export default function PageShowElement ({
                 userId: user.ID,
                 message: "The user has edit a " + uniqueName + " info with the id " + id + " successfully!"
             }
-        })
-        navigate(editLink)
+        }).finally(() => {navigate(editLink)})
     }
     const showInfo = (info, howToTractIt) => {
         var infoToShow = info
@@ -146,7 +144,7 @@ export default function PageShowElement ({
                     {
                         (user.admin == true && edit == true && create == true) && <tr id='buttoneditselecionjasfjagjd-tr'>
                             <td colSpan={2} id='buttoneditselecionjasfjagjd'>
-                                <button className='info-edit-infoz' onClick={() => { if (editCallback() == true)newItem()}}>Save</button>
+                                <button className='info-edit-infoz' onClick={() => { if (editCallback() == true) newItem()}}>Save</button>
                             </td>
                         </tr>
                     }
