@@ -17,7 +17,8 @@ export default function PageShowElement ({
     editCallback,
     children,
     baseLink,
-    uniqueName
+    uniqueName,
+    ClassNAme
 }) {
     const { id } = useParams();
     const user = useSelector((state) => state.AppGlobals.User)
@@ -91,7 +92,7 @@ export default function PageShowElement ({
         return infoToShow
     }
         return (
-        <div className='infoAdjuster'>
+        <div className={(ClassNAme != undefined) ? 'infoAdjuster ' + ClassNAme : 'infoAdjuster'}>
             <table className="userFormTablez">
                 <tbody>
                 <tr id="tiitle">

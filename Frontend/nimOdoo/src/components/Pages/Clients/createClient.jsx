@@ -11,7 +11,7 @@ export default function CreateClient ({}) {
 
     const [aontherLoading, setAnotherLoading] = useState(false)
     const [editer] = useMutation(Queries.addClient)
-    const { id } = useParams();
+    const { id } = useParams()
 
     const [name, setName] = useState("")
     const [surname, setSurname] = useState("")

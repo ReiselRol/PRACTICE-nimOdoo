@@ -3,3 +3,5 @@ export const SALES_INFO_CONFIG = [
     ["creationDate", "Creation Date", "Text"],
     ["state", "Status", "Status"],
 ]
+export const SALES_INFO_CONFIG_CREATE = [
+]

@@ -1,0 +1,40 @@
+.selectitor{
+    border-radius: 9px;
+    width: 30vw;
+    margin-left: 11vw;
+    padding: 0.3%;
+    font-size: 1.5rem;
+    border: rgba(0, 102, 255, 0.485) solid 2px;
+    position: absolute;
+}
+.selectitor:enabled{
+    border: rgba(0, 0, 0, 0.485) solid 2px;
+}
+.selectitor > div {
+    z-index: 2000 !important;
+    position:relative;
+}
+.ingoreOverflow {
+    position: relative;
+    filter: brightness(1) !important;
+}
+.rfleddgf{
+    text-align: right;
+}
+.jpoderr { 
+    height: auto !important;
+    position: absolute !important;
+    margin-top: 41vh !important;
+}
+.possiblespro {
+    width: 100% !important;
+    filter: brightness(1) !important;
+    background: linear-gradient(0, white, gray)
+}
+.possiblespro > tr {
+    width: 100% !important;
+}
+.possiblespro > td {
+    width: 33% !important;
+    background: rgba(255, 255, 255, 0) !important;
+}
