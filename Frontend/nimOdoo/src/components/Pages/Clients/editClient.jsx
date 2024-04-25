@@ -5,6 +5,8 @@ import { useQuery, useMutation } from "@apollo/client";
 import * as Queries from "../../../apollo/apolloQueries"
 import { SHOW_CLIENT_INFO_CONFIG } from "./constants";
 import { useState, useEffect } from "react";
+import Select from 'react-select';
+import './client.css'
 
 export default function EditClient ({}) {
 
@@ -16,6 +18,10 @@ export default function EditClient ({}) {
             clientID : id
         }
     });
+
+    const { loading : loading2, error : error2, data: data2, refetch: refecth2 } = useQuery(Queries.getAllEnterprises)
+    const [options, setOptions] = useState([])
+    const [optionSelected, setOptionSelected] = useState(null)
 
     const [name, setName] = useState("")
     const [surname, setSurname] = useState("")
@@ -39,6 +45,7 @@ export default function EditClient ({}) {
                 surname : surname,
                 email : email,
                 phone : phone,
+                enterpriseId : optionSelected.value
             }
         }).finally(setAnotherLoading(false))
         return true
@@ -52,6 +59,16 @@ export default function EditClient ({}) {
             setPhone(data.getClientByID.phone)
         }
     }, [loading])
+
+    useEffect(() => {
+        if (loading2 == false) {
+            var newOptions = []
+            for (var i = 0; i < data2.getEnterprises.length; i++) {
+                newOptions.push({value : data2.getEnterprises[i].ID, label: data2.getEnterprises[i].name})
+            }
+            setOptions(newOptions)
+        }
+    }, [loading2])
     if (loading || aontherLoading) return <PageLoading/>
     return (
         <Page Name={"Edit a Client"}>
@@ -66,9 +83,15 @@ export default function EditClient ({}) {
                     editStates={editStates}
                     uniqueName="client"
                 >
-                    <tr>
+                    <tr className="ingoreOverflow">
                         <td>Enterprise</td>
-                    {(data.getClientByID.enterpriseID == null) ? <td>This client dont have an enterprise...</td> : <></>}
+                        <td className="ingoreOverflow"><Select
+                            defaultValue={optionSelected}
+                            onChange={setOptionSelected}
+                            options={options}
+                            className="selectitor"
+                            autoFocus={false}
+                        /></td>
                     </tr>
                 </PageShowElement>
             }

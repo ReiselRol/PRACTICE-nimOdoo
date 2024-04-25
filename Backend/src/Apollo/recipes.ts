@@ -20,7 +20,7 @@ const clientSchema = new Schema({
     surname: String,
     email: String,
     phone: String,
-    enterpriseID: Number // ID Empresa si es de una y si no -1
+    enterpriseID: String // ID Empresa si es de una y si no -1
 })
 
 const logSchema = new Schema({

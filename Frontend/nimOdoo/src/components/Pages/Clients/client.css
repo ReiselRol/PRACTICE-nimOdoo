@@ -1,0 +1,20 @@
+.selectitor{
+    border-radius: 9px;
+    width: 30vw;
+    margin-left: 11vw;
+    padding: 0.3%;
+    font-size: 1.5rem;
+    border: rgba(0, 102, 255, 0.485) solid 2px;
+    z-index: 2000 !important;
+}
+.selectitor:enabled{
+    border: rgba(0, 0, 0, 0.485) solid 2px;
+}
+.selectitor > div {
+    z-index: 2000 !important;
+}
+.ingoreOverflow {
+    z-index: 2000 !important;
+    position: relative;
+    filter: brightness(1) !important;
+}

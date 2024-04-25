@@ -4,18 +4,26 @@ import { PageLoading, PageShowElement } from "../PageElements";
 import { useQuery } from "@apollo/client";
 import * as Queries from "../../../apollo/apolloQueries"
 import { SHOW_CLIENT_INFO_CONFIG } from "./constants";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function ShowClient ({}) {
 
     const { id } = useParams();
+    var [enterpriseID, setEnterpriseID] = useState("")
+    const { loading : loadingE, error : errorE, data: dataE, refetch: refetchE} = useQuery(Queries.getEnterpriseByID, {
+        variables:{
+            enterpriseID : enterpriseID
+        }
+    });
     const { loading, error, data, refetch} = useQuery(Queries.getClientByID, {
         variables:{
             clientID : id
         }
     });
     useEffect(() => { refetch() }, [])
-    if (loading) return <PageLoading/>
+    useEffect(() => { if (loading == false) setEnterpriseID(data.getClientByID.enterpriseID) }, [loading])
+    useEffect(() => { refetchE() }, [enterpriseID])
+    if (loading || loadingE) return <PageLoading/>
     return (
         <Page Name={"Show a Client"}>
             {
@@ -30,7 +38,8 @@ export default function ShowClient ({}) {
                 >
                     <tr>
                         <td>Enterprise</td>
-                    {(data.getClientByID.enterpriseID == null) ? <td>This client dont have an enterprise...</td> : <></>}
+                    {(data.getClientByID.enterpriseID == null) ? <td>This client dont have an enterprise...</td>
+                    : (dataE != undefined) ? <td>{dataE.getEnterpriseByID.name}</td> : <></>}
                     </tr>
                 </PageShowElement>
             }
