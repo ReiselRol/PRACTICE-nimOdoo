@@ -66,6 +66,7 @@ export default function EditUser ({}) {
                     edit={true}
                     editCallback={edit}
                     editStates={editStates}
+                    uniqueName="user"
                 />
             }
         </Page>

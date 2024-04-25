@@ -2,6 +2,8 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import "./pageShowElement.css"
 import { useMutation } from '@apollo/client'
+import * as Queries from '../../../apollo/apolloQueries'
+import { useParams } from 'react-router-dom'
 
 export default function PageShowElement ({
     edit = false,
@@ -14,9 +16,11 @@ export default function PageShowElement ({
     editStates,
     editCallback,
     children,
-    baseLink
+    baseLink,
+    uniqueName
 }) {
-
+    const { id } = useParams();
+    const user = useSelector((state) => state.AppGlobals.User)
     var infoOnArray = [info]
     if (create == true){
         edit = true
@@ -24,7 +28,6 @@ export default function PageShowElement ({
         const object = {}
         for (var i = 0; i < options.length; i++) Object.defineProperty(object, options[i][0], { value: ""})
         infoOnArray.push(object)
-        console.log(infoOnArray)
     }
     var deleteItem = (id) => {console.log("Pass the query...")}
     var itemDeleter = (id) => {
@@ -34,7 +37,7 @@ export default function PageShowElement ({
             }
         })
     }
-    const user = useSelector((state) => state.AppGlobals.User)
+    const [logger] = useMutation(Queries.addLog)
     const navigate = useNavigate()
     if (deleter != null || deleter != undefined) {
         [deleteItem] = useMutation(deleter)
@@ -43,8 +46,37 @@ export default function PageShowElement ({
                 variables: {
                     id: infoOnArray[0].ID
                 }
-            }).finally(() => {console.log(baseLink); navigate(baseLink)})
+            }).finally(() => {
+                logger({
+                    variables: {
+                        userName: user.name,
+                        userId: user.ID,
+                        message: "The user has deleted a " + uniqueName + " with id " + infoOnArray[0].ID + " successfully!"
+                    }
+                })
+                navigate(baseLink)
+            })
         }
+    }
+    const newItem = () => {
+        logger({
+            variables: {
+                userName: user.name,
+                userId: user.ID,
+                message: "The user has added a new " + uniqueName + " info successfully!"
+            }
+        })
+        navigate(editLink)
+    }
+    const editItem = () => {
+        logger({
+            variables: {
+                userName: user.name,
+                userId: user.ID,
+                message: "The user has edit a " + uniqueName + " info with the id " + id + " successfully!"
+            }
+        })
+        navigate(editLink)
     }
     const showInfo = (info, howToTractIt) => {
         var infoToShow = info
@@ -106,7 +138,7 @@ export default function PageShowElement ({
                     {
                         (user.admin == true && edit == true && create == false) && <tr id='buttoneditselecionjasfjagjd-tr'>
                             <td colSpan={2} id='buttoneditselecionjasfjagjd'>
-                                <button className='info-edit-infoz' onClick={() => { if (editCallback() == true) navigate(editLink)}}>Save</button>
+                                <button className='info-edit-infoz' onClick={() => { if (editCallback() == true) editItem() }}>Save</button>
                                 <button className='info-delete-infoz' onClick={() => {navigate(editLink)}}>Go back</button>
                             </td>
                         </tr>
@@ -114,7 +146,7 @@ export default function PageShowElement ({
                     {
                         (user.admin == true && edit == true && create == true) && <tr id='buttoneditselecionjasfjagjd-tr'>
                             <td colSpan={2} id='buttoneditselecionjasfjagjd'>
-                                <button className='info-edit-infoz' onClick={() => { if (editCallback() == true) navigate(editLink)}}>Save</button>
+                                <button className='info-edit-infoz' onClick={() => { if (editCallback() == true)newItem()}}>Save</button>
                             </td>
                         </tr>
                     }

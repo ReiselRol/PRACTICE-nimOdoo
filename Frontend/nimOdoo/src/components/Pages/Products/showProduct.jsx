@@ -28,6 +28,7 @@ export default function ShowProduct ({}) {
                     editLink={"/product/" + id + "/edit"}
                     deleter={Queries.deleteProduct}
                     baseLink="/product/"
+                    uniqueName="product"
                 />
             }
         </Page>

@@ -45,6 +45,7 @@ export default function CreateUser ({}) {
                     create={true}
                     editCallback={edit}
                     editStates={editStates}
+                    uniqueName="user"
                 />
             }
         </Page>

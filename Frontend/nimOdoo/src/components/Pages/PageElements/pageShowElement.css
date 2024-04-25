@@ -63,7 +63,7 @@
 }
 .info-edit-infoz {
     background-color: rgb(0, 154, 3);
-    width: 5vw;
+    width: 80px;
     color: white;
     transition: background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
     filter: brightness(1);
@@ -77,7 +77,7 @@
 .info-delete-infoz{
     background-color: rgb(154, 0, 0);
     color: white;
-    width: 5vw;
+    width: 80px;
     margin-left: 1vw;
     transition: background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
     filter: brightness(1);
@@ -94,4 +94,7 @@
     align-items: center; /* Centra verticalmente los elementos hijos */
     height: 100%; /* Ajusta la altura según sea necesario */
     width: 100%;
+    @media (max-width: 400px) {
+        margin-left: 30vw;
+    }
 }

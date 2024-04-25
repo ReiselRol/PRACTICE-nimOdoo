@@ -26,6 +26,7 @@ export default function ShowUser ({}) {
                     editLink={"/user/" + id + "/edit"}
                     baseLink="/user/"
                     deleter={Queries.deleteUser}
+                    uniqueName="user"
                 />
             }
         </Page>

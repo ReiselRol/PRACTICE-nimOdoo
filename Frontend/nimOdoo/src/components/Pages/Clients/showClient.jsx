@@ -26,6 +26,7 @@ export default function ShowClient ({}) {
                     editLink={"/client/" + id + "/edit"}
                     deleter={Queries.deleteClient}
                     baseLink="/client/"
+                    uniqueName="client"
                 >
                     <tr>
                         <td>Enterprise</td>

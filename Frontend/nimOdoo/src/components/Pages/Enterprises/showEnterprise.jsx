@@ -4,6 +4,7 @@ import { PageLoading, PageShowElement } from "../PageElements";
 import { useQuery } from "@apollo/client";
 import * as Queries from "../../../apollo/apolloQueries"
 import { SHOW_ENTERPRISE_INFO_CONFIG } from "./constants";
+import { useEffect } from "react";
 
 export default function ShowEnterprise ({}) {
 
@@ -13,6 +14,7 @@ export default function ShowEnterprise ({}) {
             enterpriseID : id
         }
     });
+    useEffect(() => {refetch()}, []);
     if (loading) return <PageLoading/>
     return (
         <Page Name={"Show a Enterprise"}>
@@ -24,6 +26,7 @@ export default function ShowEnterprise ({}) {
                     editLink={"/enterprise/" + id + "/edit"}
                     deleter={Queries.deleteEnterprise}
                     baseLink="/enterprise/"
+                    uniqueName="enterprise"
                 />
             }
         </Page>

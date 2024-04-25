@@ -64,6 +64,7 @@ export default function EditClient ({}) {
                     edit={true}
                     editCallback={edit}
                     editStates={editStates}
+                    uniqueName="client"
                 >
                     <tr>
                         <td>Enterprise</td>

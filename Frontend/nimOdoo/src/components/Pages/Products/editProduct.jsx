@@ -69,6 +69,7 @@ export default function EditProduct ({}) {
                     edit={true}
                     editCallback={edit}
                     editStates={editStates}
+                    uniqueName="product"
                 />
             }
         </Page>
