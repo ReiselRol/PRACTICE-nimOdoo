@@ -1,217 +1,217 @@
 const typeDefs = ` #graphql
-    type User {
-        ID: String!
-        name: String!
-        surname: String
-        password: String!
-        admin: Boolean!
-        email: String!
-    }
+type User {
+ID: String!
+name: String!
+surname: String
+password: String!
+admin: Boolean!
+email: String!
+}
 
-    type Log {
-        UserName: String!
-        UserID: String!
-        Message: String!
-    }
+type Log {
+UserName: String!
+UserID: String!
+Message: String!
+}
 
-    type Client {
-        ID: String!
-        name: String!
-        surname: String
-        email: String!
-        phone: String!
-        enterpriseID: String
-    }
+type Client {
+ID: String!
+name: String!
+surname: String
+email: String!
+phone: String!
+enterpriseID: String
+}
 
-    type Enterprise {
-        ID: String!
-        name: String!
-        phone: String!
-        address: String!
-        email: String!
-        cif: String!
-    }
+type Enterprise {
+ID: String!
+name: String!
+phone: String!
+address: String!
+email: String!
+cif: String!
+}
 
-    type Product {
-        ID: String!
-        name: String!
-        description: String
-        stock: Int!
-        price: Float!
-    }
+type Product {
+ID: String!
+name: String!
+description: String
+stock: Int!
+price: Float!
+}
 
-    type SalesProposal {
-        ID: String!
-        proposerID: String!
-        productIDs: [String]!
-        clientID: String!
-        creationDate: String
-        state: Int!
-    }
+type SalesProposal {
+ID: String!
+proposerID: String!
+productIDs: [String]!
+clientID: String!
+creationDate: String
+state: Int!
+}
 
-    type Nimodoo {
-        modules: [String]!
-    }
+type Nimodoo {
+modules: [String]!
+}
 
-    type Query {
+type Query {
 
-        getUsers: [User!]!
-        
-        getUserByID(userID: ID!): User
+getUsers: [User!]!
 
-        getUserByEmail(userEmail: String): User
-    
-        getClients: [Client!]!
+getUserByID(userID: ID!): User
 
-        getConfig: [Nimodoo!]!
-    
-        getClientByID(clientID: ID!): Client
+getUserByEmail(userEmail: String): User
 
-        getLogs: [Log!]!
-    
-        getEnterprises: [Enterprise!]!
+getClients: [Client!]!
 
-        getEnterpriseByID(enterpriseID: ID!): Enterprise
-    
-        getProducts: [Product!]!
-    
-        getProductByID(productID: ID!): Product!
+getConfig: [Nimodoo!]!
 
-        getSalesProposals: [SalesProposal!]!
-    
-        getSalesProposalByID(salesProposalID: ID!): SalesProposal!
+getClientByID(clientID: ID!): Client
 
-        getSells: [SalesProposal!]!
-    
-        getSellByID(salesProposalID: ID!): SalesProposal!
+getLogs: [Log!]!
 
-    }
+getEnterprises: [Enterprise!]!
 
-    type Mutation {
-        addUser(    
-            name: String!
-            surname: String!
-            email: String!
-            password: String!
-            admin: Boolean!
-        ): User
+getEnterpriseByID(enterpriseID: ID!): Enterprise
 
-        addLog(
-            UserName: String!
-            UserID: String!
-            Message: String!
-        ) : Log
+getProducts: [Product!]!
 
-        fakeUser(    
-            total: Int!
-        ): [User]
+getProductByID(productID: ID!): Product!
 
-        addClient(
-            name: String!
-            surname: String
-            email: String!
-            phone: String!
-            enterpriseID: String
-        ): Client
+getSalesProposals: [SalesProposal!]!
 
-        fakeClient(    
-            total: Int!
-        ): [Client]
+getSalesProposalByID(salesProposalID: ID!): SalesProposal!
 
-        addEnterprise(
-            name: String!
-            phone: String!
-            address: String!
-            email: String!
-            cif: String!
-        ): Enterprise
+getSells: [SalesProposal!]!
 
-        fakeEnterprise(    
-            total: Int!
-        ): [Enterprise]
+getSellByID(salesProposalID: ID!): SalesProposal!
 
-        addProduct(
-            name: String!
-            description: String
-            stock: Int!
-            price: Float!
-        ): Product
+}
 
-        fakeProduct(    
-            total: Int!
-        ): [Product]
+type Mutation {
+addUser(    
+name: String!
+surname: String!
+email: String!
+password: String!
+admin: Boolean!
+): User
 
-        addSalesProposal(
-            proposerID: String!
-            clientID: String!
-            productIDs: [String]!
-            state: Int!
-        ): SalesProposal
+addLog(
+UserName: String!
+UserID: String!
+Message: String!
+) : Log
 
-        addConfig(
-            modules: [String]!
-        ): Nimodoo
+fakeUser(    
+total: Int!
+): [User]
 
-        updateNimodooConfigOrCreate(
-            modules: [String]!
-        ): Nimodoo
+addClient(
+name: String!
+surname: String
+email: String!
+phone: String!
+enterpriseID: String
+): Client
 
-        deleteUser(ID: ID!): User
-        deleteClient(ID: ID!): Client
-        deleteEnterprise(ID: ID!): Enterprise
-        deleteProduct(ID: ID!): Product
-        deleteSalesProposal(ID: ID!): SalesProposal
+fakeClient(    
+total: Int!
+): [Client]
 
-        updateUserByID(
-            userID: ID!
-            name: String
-            surname: String
-            email: String
-            password: String
-            admin: Boolean
-        ): User
-    
-        updateClientByID(
-            clientID: ID!
-            name: String
-            surname: String
-            email: String
-            phone: String
-            enterpriseID: String
-        ): Client
-    
-        updateProductByID(
-            productID: ID!
-            name: String
-            description: String
-            stock: Int
-            price: Float
-        ): Product
-    
-        updateEnterpriseByID(
-            enterpriseID: ID!
-            name: String
-            phone: String
-            address: String
-            email: String
-            cif: String
-        ): Enterprise
-    
-        updateSalesProposalByID(
-            salesProposalID: ID!
-            proposerID: String
-            clientID: String
-            productIDs: [String]
-            state: Int
-        ): SalesProposal
-    
-        updateSellByID(
-            salesProposalID: ID!
-            proposerID: String
-            clientID: String
-            productIDs: [String]
-            state: Int
-        ): SalesProposal
-    }
+addEnterprise(
+name: String!
+phone: String!
+address: String!
+email: String!
+cif: String!
+): Enterprise
+
+fakeEnterprise(    
+total: Int!
+): [Enterprise]
+
+addProduct(
+name: String!
+description: String
+stock: Int!
+price: Float!
+): Product
+
+fakeProduct(    
+total: Int!
+): [Product]
+
+addSalesProposal(
+proposerID: String!
+clientID: String!
+productIDs: [String]!
+state: Int!
+): SalesProposal
+
+addConfig(
+modules: [String]!
+): Nimodoo
+
+updateNimodooConfigOrCreate(
+modules: [String]!
+): Nimodoo
+
+deleteUser(ID: ID!): User
+deleteClient(ID: ID!): Client
+deleteEnterprise(ID: ID!): Enterprise
+deleteProduct(ID: ID!): Product
+deleteSalesProposal(ID: ID!): SalesProposal
+
+updateUserByID(
+userID: ID!
+name: String
+surname: String
+email: String
+password: String
+admin: Boolean
+): User
+
+updateClientByID(
+clientID: ID!
+name: String
+surname: String
+email: String
+phone: String
+enterpriseID: String
+): Client
+
+updateProductByID(
+productID: ID!
+name: String
+description: String
+stock: Int
+price: Float
+): Product
+
+updateEnterpriseByID(
+enterpriseID: ID!
+name: String
+phone: String
+address: String
+email: String
+cif: String
+): Enterprise
+
+updateSalesProposalByID(
+salesProposalID: ID!
+proposerID: String
+clientID: String
+productIDs: [String]
+state: Int
+): SalesProposal
+
+updateSellByID(
+salesProposalID: ID!
+proposerID: String
+clientID: String
+productIDs: [String]
+state: Int
+): SalesProposal
+}
 `;
 export default typeDefs;
